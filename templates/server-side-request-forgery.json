@@ -1,0 +1,44 @@
+﻿{
+    "id":  "5f4195c8-0fce-450a-8863-e82c5a56ea51",
+    "created":  "2026-09-17T10:36:23.247097Z",
+    "updated":  "2026-10-23T16:52:37.709262Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/5f4195c8-0fce-450a-8863-e82c5a56ea51",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/5f4195c8-0fce-450a-8863-e82c5a56ea51/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "web",
+                 "external",
+                 "internal"
+             ],
+    "translations":  [
+                         {
+                             "id":  "8a61519e-2a00-4bb7-95b3-16d512bdddab",
+                             "created":  "2026-09-17T10:36:23.248191Z",
+                             "updated":  "2026-09-17T10:36:23.249701Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  9.3,
+                             "risk_level":  "critical",
+                             "data":  {
+                                          "title":  "Server-Side Request Forgery",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N",
+                                          "summary":  "The application retrieved resources from URLs supplied in the request, allowing\nan attacker to direct those requests at internal systems otherwise unreachable\nfrom outside the network.",
+                                          "description":  "The application accepted a URL as input and issued a request to it from the\nserver. Because the destination was not restricted, an attacker could supply\naddresses referring to systems within the internal network, to the server itself\nvia its loopback interface, or to cloud platform metadata services.\n\nRequests issued this way originate from the application server and therefore\ncarry its network position and, in some cases, its credentials. Controls that\nrestrict access based on source address treat the request as internal and permit\nit. Services intentionally bound to the loopback interface on the assumption that\nthey are unreachable become accessible.\n\nThe technique permits the internal network to be mapped by observing differences\nin response time and content between addresses that are reachable and those that\nare not. Where the application returns the content retrieved, data from internal\nservices is disclosed directly; where it does not, the difference in behaviour\nstill reveals the state of the target.\n\nValidation based on the hostname supplied is often insufficient, as\nredirects, alternative address encodings, and DNS records resolving to internal\naddresses each defeat it.",
+                                          "impact":  "An attacker could reach internal systems from outside the network using the\napplication server as a relay, enumerate internal infrastructure, and interact\nwith services that rely on network position for their protection. Where cloud\nmetadata services are reachable, this may disclose credentials granting access to\nthe wider hosting environment.",
+                                          "recommendation":  "1. Where the set of destinations is known, validate the supplied value against an\n   allowlist of permitted hosts and reject anything else. This is the only\n   reliable control.\n\n2. Where arbitrary destinations must be supported, resolve the hostname and\n   verify that the resulting address is not within private, loopback, or\n   link-local ranges, repeating the check after every redirect rather than only\n   on the initial value.\n\n3. Disable redirect following and restrict the permitted schemes to HTTP and\n   HTTPS, preventing the use of alternative protocol handlers.\n\n4. Issue outbound requests through a dedicated egress proxy with its own\n   allowlist, so that network controls enforce the restriction independently of\n   the application.\n\n5. Require authentication on internal services rather than relying on network\n   position, and enforce the use of the instance metadata service version that\n   requires a session token where the application is cloud hosted.\n\n6. Return a generic response to the client rather than the content retrieved,\n   where the business function permits.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1090/",
+                                                             "https://cwe.mitre.org/data/definitions/918.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-918"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

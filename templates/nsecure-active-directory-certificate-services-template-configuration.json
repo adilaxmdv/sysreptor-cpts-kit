@@ -1,0 +1,47 @@
+﻿{
+    "id":  "3089440e-3af1-4762-b76c-7b988c5cc69a",
+    "created":  "2026-09-17T10:00:36.262843Z",
+    "updated":  "2026-09-17T10:01:55.499679Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/3089440e-3af1-4762-b76c-7b988c5cc69a",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/3089440e-3af1-4762-b76c-7b988c5cc69a/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "ad",
+                 "internal",
+                 "windows",
+                 "config",
+                 "credentials"
+             ],
+    "translations":  [
+                         {
+                             "id":  "da5eb3a5-77a9-4411-b19c-12ce7fc696e3",
+                             "created":  "2026-09-17T10:00:36.263818Z",
+                             "updated":  "2026-09-17T10:00:36.265940Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  8.8,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Insecure Active Directory Certificate Services Template Configuration",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "A certificate template permitted standard domain users to request certificates on\nbehalf of any account, including domain administrators, allowing authentication\nas those accounts.",
+                                          "description":  "Active Directory Certificate Services issues certificates according to templates\nthat define who may enrol and what the resulting certificate may be used for.\nWhere a template permits client authentication, allows the requester to supply an\narbitrary subject alternative name, does not require approval by a certificate\nmanager, and grants enrolment rights to broad groups, the combination allows any\nmember of those groups to obtain a certificate identifying them as any other\naccount in the directory.\n\nThe resulting certificate is issued by the enterprise certification authority and\nis therefore trusted for Kerberos authentication throughout the forest. The holder\ncan authenticate as the impersonated account without ever knowing its password.\n\nThis condition is particularly durable. A certificate remains valid for its full\nlifetime regardless of password changes, so an attacker retains access even after\nthe compromised account\u0027s password is reset. Remediation requires revocation of\nthe certificate in addition to correcting the template.\n\nA template meeting these conditions was identified within the environment and was\nenrollable by standard domain users.",
+                                          "impact":  "Any authenticated domain user could obtain a certificate authenticating them as a\ndomain administrator, resulting in complete compromise of the Active Directory\nforest. Because the certificate remains valid independently of the account\u0027s\npassword, access persists through credential rotation and standard incident\nresponse measures unless the certificate itself is identified and revoked.",
+                                          "recommendation":  "1. Disable the affected certificate template immediately, or remove client\n   authentication from its extended key usage where the template serves another\n   legitimate purpose.\n\n2. Remove the \"Supply in the request\" setting for subject alternative names.\n   Certificate subjects should be constructed by the certification authority from\n   directory data rather than supplied by the requester.\n\n3. Enable certificate manager approval on any template that permits client\n   authentication and is enrollable by non-administrative users.\n\n4. Restrict enrolment rights to purpose-specific security groups, removing broad\n   principals such as Domain Users and Authenticated Users.\n\n5. Audit all certificates already issued from the affected template, and revoke\n   any that cannot be attributed to a legitimate request. Correcting the template\n   alone does not invalidate certificates already obtained.\n\n6. Review all templates in the environment against known misconfiguration classes\n   using a tool such as Certify or Certipy, as several distinct escalation paths\n   exist beyond the one identified here.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1649/",
+                                                             "https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/active-directory-certificate-services-overview",
+                                                             "https://cwe.mitre.org/data/definitions/269.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cCA_HOSTNAME\u003e (\u003cCA_IP\u003e) - certificate template: \u003cTEMPLATE_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-269"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

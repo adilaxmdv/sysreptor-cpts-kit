@@ -1,0 +1,43 @@
+﻿{
+    "id":  "06c89ff8-5c9e-4647-bc63-b32291512fb2",
+    "created":  "2026-09-16T17:16:54.885878Z",
+    "updated":  "2026-10-23T16:53:15.508739Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/06c89ff8-5c9e-4647-bc63-b32291512fb2",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/06c89ff8-5c9e-4647-bc63-b32291512fb2/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "web",
+                 "hardening",
+                 "external",
+                 "config"
+             ],
+    "translations":  [
+                         {
+                             "id":  "ffdce2ca-a714-4aab-b829-63760a1cb6a3",
+                             "created":  "2026-09-16T17:16:54.886783Z",
+                             "updated":  "2026-09-16T17:16:54.887905Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  3.6,
+                             "risk_level":  "low",
+                             "data":  {
+                                          "title":  "Session management weaknesses",
+                                          "cvss":  "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N",
+                                          "summary":  "We were able to identify weaknesses in the web application\u0027s session management. \nThe users\u0027 sessions were usable without time restrictions and therefore did not require re-authentication at any time. \nPeople with access to a computer system could exploit this situation if another user had not explicitly logged out of the application beforehand.\n",
+                                          "description":  "We tested how the application handles session lifetime and invalidation. Sessions remained valid without a time limit. We kept a session idle for `\u003cDURATION\u003e` and then replayed the session cookie `\u003cCOOKIE_NAME\u003e`. The application accepted it without asking for re-authentication. `\u003cADDITIONAL_FINDINGS\u003e`\n\nAn attacker who obtains a session token can reuse it for as long as the session stays valid. Tokens can leak through log files, proxy servers, browser history, or a shared or unattended computer where the user did not log out. Without an idle timeout or an absolute lifetime, the window for abuse has no upper bound.\n\nWe also checked whether the server invalidates the session on logout. `\u003cLOGOUT_BEHAVIOUR\u003e` After logout, the old token was still accepted on `\u003cURL\u003e`, which means a stolen token stays usable even after the user ends the session.\n",
+                                          "recommendation":  "* User sessions in web applications should time out automatically after a certain period of inactivity.\n* Depending on the criticality of the user authorization and the application, the timeout could be approximately between one hour and one day.\n* Enforce an absolute session lifetime in addition to the idle timeout.\n* Invalidate the session on the server at logout and after a password change.\n* Require re-authentication for sensitive actions.\n",
+                                          "short_recommendation":  "Users should be logged out automatically after a certain period of inactivity.",
+                                          "references":  [
+
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e"
+                                                                  ]
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

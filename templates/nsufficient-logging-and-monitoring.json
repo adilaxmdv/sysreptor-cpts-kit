@@ -1,0 +1,45 @@
+﻿{
+    "id":  "70e24e40-000a-4851-8c61-78fb3fd3f380",
+    "created":  "2026-09-17T10:41:40.242806Z",
+    "updated":  "2026-09-17T10:42:36.709522Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/70e24e40-000a-4851-8c61-78fb3fd3f380",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/70e24e40-000a-4851-8c61-78fb3fd3f380/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "hardening",
+                 "config",
+                 "infrastructure"
+             ],
+    "translations":  [
+                         {
+                             "id":  "b331e7a4-3c27-40ce-bbec-6145df40ef88",
+                             "created":  "2026-09-17T10:41:40.244217Z",
+                             "updated":  "2026-09-17T10:41:40.245589Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  5.3,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Insufficient Logging and Monitoring",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:H/A:N",
+                                          "summary":  "Activity conducted throughout this assessment produced no detectable response,\nindicating that logging and monitoring were insufficient to identify an attack in\nprogress.",
+                                          "description":  "The assessment was conducted without any attempt to evade detection. Network\nenumeration, credential attacks, lateral movement, and privilege escalation were\nperformed using standard tooling and default configurations, over a period of\nseveral days.\n\nAt no point was any activity queried, blocked, or escalated. No contact was made\nwith the testing team regarding the traffic observed, and no account used during\nthe assessment was disabled or investigated.\n\nSeveral categories of activity conducted would ordinarily generate events\nsuitable for detection, including authentication failures across multiple\naccounts, requests for Kerberos service tickets using legacy encryption,\nadministrative authentication from unusual sources, and access to directory\nobjects associated with privilege escalation. The absence of any response\nindicates either that these events are not being collected, that they are\ncollected but not analysed, or that alerting exists but does not reach a party\nable to act on it.\n\nDetection capability is a distinct control from prevention. The weaknesses\ndocumented elsewhere in this report describe how an attacker gains access; this\nfinding describes why that access would continue undetected.",
+                                          "impact":  "An attacker operating within the environment would be unlikely to be detected,\nallowing the time between initial compromise and discovery to extend\nindefinitely. This period determines the extent of the damage that can be caused,\nas it governs how much data can be removed, how many systems can be reached, and\nhow thoroughly persistence can be established before any response begins.\nInsufficient logging additionally impairs investigation after the event, as the\nrecords required to establish what occurred are not available.",
+                                          "recommendation":  "1. Collect security event logs centrally from all domain controllers, servers,\n   workstations, and network infrastructure, retaining them for a period\n   sufficient to support investigation of an intrusion discovered late.\n\n2. Forward logs to a system outside the monitored environment, so that an\n   attacker holding administrative access to a host cannot alter the record of\n   their activity.\n\n3. Implement detection rules for the activity classes identified during this\n   assessment, including authentication failures aggregated across accounts,\n   Kerberos ticket requests using legacy encryption, and modification of\n   privileged group membership and directory object permissions.\n\n4. Deploy endpoint detection capable of identifying credential access and\n   suspicious process behaviour, which produces signals unavailable from\n   operating system logs alone.\n\n5. Define and document a response process specifying who receives alerts, within\n   what timeframe they are triaged, and what authority they hold to act.\n\n6. Validate detection capability periodically through structured testing, so that\n   coverage gaps are identified deliberately rather than during an incident.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1685/001/",
+                                                             "https://cwe.mitre.org/data/definitions/778.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cDOMAIN\u003e (enterprise-wide)"
+                                                                  ],
+                                          "cwe":  "CWE-778"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

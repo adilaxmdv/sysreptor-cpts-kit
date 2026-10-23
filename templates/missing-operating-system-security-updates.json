@@ -1,0 +1,47 @@
+﻿{
+    "id":  "5fc58652-7190-4787-83a5-214deb9959fc",
+    "created":  "2026-09-17T10:20:17.160652Z",
+    "updated":  "2026-10-23T16:52:38.076297Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/5fc58652-7190-4787-83a5-214deb9959fc",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/5fc58652-7190-4787-83a5-214deb9959fc/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "windows",
+                 "linux",
+                 "hardening",
+                 "config"
+             ],
+    "translations":  [
+                         {
+                             "id":  "7b035ae6-c0ff-4780-aa28-03253d158ea5",
+                             "created":  "2026-09-17T10:20:17.161667Z",
+                             "updated":  "2026-09-17T10:20:17.169358Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  9.8,
+                             "risk_level":  "critical",
+                             "data":  {
+                                          "title":  "Missing Operating System Security Updates",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "Systems within the environment were missing security updates addressing\nvulnerabilities for which reliable public exploit code exists, allowing remote\ncompromise without credentials.",
+                                          "description":  "Hosts were identified running operating system builds that had not received\nsecurity updates released by the vendor. The absent updates addressed\nvulnerabilities in network-facing services, several of which permit code\nexecution prior to authentication.\n\nExploit code for these vulnerabilities is publicly available, integrated into\nwidely distributed exploitation frameworks, and requires no specialist knowledge\nto use. The interval between a patch being published and exploit code appearing\nis routinely measured in days, so the exposure period represented by an unpatched\nhost is substantial.\n\nExploitation of the affected services typically yields execution in the context\nof the operating system kernel or a highly privileged service account, meaning\nsuccessful exploitation results in immediate and complete compromise of the host\nrather than a limited foothold requiring further escalation.\n\nAffected systems were identified through service version\nenumeration and confirmed where testing could be conducted safely.",
+                                          "impact":  "An attacker with network access to the affected systems could obtain complete\ncontrol of them without any credentials, using publicly available tooling. This\ngrants access to all data held on those hosts, permits the extraction of\ncredential material from memory including that of privileged users who have\nlogged on, and provides a position from which the remainder of the network can be\nattacked.",
+                                          "recommendation":  "1. Apply all outstanding security updates to the affected systems as a\n   priority, beginning with those addressing vulnerabilities in network-facing\n   services that permit unauthenticated code execution.\n\n2. Where a system cannot be patched within a reasonable period due to application\n   compatibility, isolate it at the network level so that the affected services\n   are reachable only from systems that genuinely require access, and document\n   the exception with a review date.\n\n3. Implement a patch management process with defined timescales by severity, and\n   report against those timescales so that exceptions are visible to management\n   rather than accumulating silently.\n\n4. Deploy vulnerability scanning across the estate on a recurring basis and\n   reconcile the results against the asset inventory, so that systems missing\n   from patch management are identified.\n\n5. Review the asset inventory itself, as unpatched systems are frequently those\n   that no team recognises as their responsibility.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1210/",
+                                                             "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+                                                             "https://cwe.mitre.org/data/definitions/1104.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e) - \u003cOS_VERSION\u003e, missing \u003cPATCH_OR_CVE\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-1104"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

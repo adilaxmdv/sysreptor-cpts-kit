@@ -1,0 +1,46 @@
+﻿{
+    "id":  "bd41ee0a-a32f-4d0a-93cb-35df818a28ff",
+    "created":  "2026-09-17T10:12:59.487926Z",
+    "updated":  "2026-09-17T10:17:57.266825Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/bd41ee0a-a32f-4d0a-93cb-35df818a28ff",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/bd41ee0a-a32f-4d0a-93cb-35df818a28ff/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "windows",
+                 "ad",
+                 "hardening"
+             ],
+    "translations":  [
+                         {
+                             "id":  "0f386c91-6963-446c-8fb3-ba4eb88a4ac4",
+                             "created":  "2026-09-17T10:12:59.489261Z",
+                             "updated":  "2026-09-17T10:12:59.490538Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  6.5,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Excessive Permissions on Network File Shares",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+                                          "summary":  "Network file shares granted read or write access to all authenticated users,\nexposing sensitive business data and credential material to any account in the\ndomain.",
+                                          "description":  "Multiple file shares were configured with share or NTFS permissions granting\naccess to broad principals such as Everyone, Authenticated Users, or Domain\nUsers. The content held on these shares included business documentation, system\nbackups, deployment scripts, and application configuration files.\n\nAccess of this type requires no exploitation. An attacker holding any valid domain\naccount can enumerate available shares and recursively search their contents for\nmaterial of interest, an activity that generates ordinary file access events and\nis therefore difficult to distinguish from legitimate use.\n\nWhere write access was also granted, the exposure extends beyond disclosure. An\nattacker able to modify scripts or place files in locations from which they are\nlater executed obtains code execution in the context of whichever user or\nscheduled process runs them, frequently a privileged account.\n\nPermissions of this kind commonly originate as temporary grants made to resolve\nan access problem, and remain in place indefinitely because no review process\nexists to remove them.",
+                                          "impact":  "Any authenticated domain user could access sensitive business information without\nauthorisation. Where credential material was present, this directly enabled\nprivilege escalation and lateral movement. Where write access was granted, an\nattacker could modify executable content and obtain code execution in the context\nof other users, including administrative accounts.",
+                                          "recommendation":  "1. Review share and NTFS permissions across all file servers and remove access\n   granted to Everyone, Authenticated Users, and Domain Users.\n\n2. Grant access through purpose-specific security groups aligned to business\n   function, applying the principle of least privilege.\n\n3. Ensure share-level and NTFS-level permissions are consistent. The more\n   restrictive of the two applies, and misalignment between them frequently\n   conceals excessive access from administrative review.\n\n4. Relocate sensitive content that does not belong on general-purpose shares,\n   particularly backups, scripts, and configuration files containing credentials,\n   to storage with appropriate access control.\n\n5. Implement recurring automated scanning of accessible shares for credential\n   patterns and sensitive data, so that material reintroduced after remediation\n   is identified promptly.\n\n6. Establish a periodic access review so that permissions granted for temporary\n   business needs are revoked when no longer required.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1135/",
+                                                             "https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview",
+                                                             "https://cwe.mitre.org/data/definitions/732.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\\\\\u003cHOSTNAME\u003e\\\u003cSHARE_NAME\u003e - \u003cPRINCIPAL\u003e: \u003cPERMISSION\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-732"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

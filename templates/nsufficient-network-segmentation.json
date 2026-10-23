@@ -1,0 +1,46 @@
+﻿{
+    "id":  "2d049506-74c6-42c0-b739-e964af61d958",
+    "created":  "2026-09-17T10:27:02.732669Z",
+    "updated":  "2026-09-17T10:31:51.670911Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/2d049506-74c6-42c0-b739-e964af61d958",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/2d049506-74c6-42c0-b739-e964af61d958/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "infrastructure",
+                 "hardening",
+                 "config"
+             ],
+    "translations":  [
+                         {
+                             "id":  "796dc4f0-2e0c-47f5-a928-4a18d49fbaf2",
+                             "created":  "2026-09-17T10:27:02.733612Z",
+                             "updated":  "2026-09-17T10:27:02.734982Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  8.0,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Insufficient Network Segmentation",
+                                          "cvss":  "CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "The internal network permitted unrestricted communication between systems of\ndiffering security requirements, allowing compromise of a single low-value host\nto reach critical infrastructure without obstruction.",
+                                          "description":  "Systems of materially different sensitivity were found to share unrestricted\nnetwork reachability. Workstations could reach domain controllers, database\nservers, and management interfaces directly on their administrative ports, and no\nfiltering was observed between the segments concerned.\n\nNetwork segmentation exists to ensure that compromise of one system does not\ntranslate into access to the entire estate. Where it is absent, an attacker who\ngains a foothold anywhere obtains the same network position as if they had\ncompromised the most sensitive system in the environment, and can enumerate and\nattack every host without needing to defeat any further control.\n\nThe absence of segmentation also removes an opportunity for detection. Traffic\ncrossing a boundary can be inspected and alerted upon; traffic within a flat\nnetwork is typically neither logged nor examined, so lateral movement produces no\nsignal.\n\nThis condition amplifies every other weakness present. A vulnerability confined\nto one segment represents a contained risk; the same vulnerability on a flat\nnetwork represents a route to complete compromise.",
+                                          "impact":  "Compromise of any single host, including a low-value workstation reached through\nphishing, would provide an attacker with unrestricted network access to critical\ninfrastructure including domain controllers and database systems. This removes\nany requirement for the attacker to defeat further network controls, and\nsubstantially reduces the likelihood that lateral movement is detected before the\nenvironment is fully compromised.",
+                                          "recommendation":  "1. Define network zones based on the sensitivity and function of the systems they\n   contain, separating user workstations, general servers, critical\n   infrastructure, and management interfaces.\n\n2. Implement filtering between zones permitting only the specific traffic\n   required by business function, denying all other traffic by default.\n\n3. Place all administrative interfaces on a dedicated management network\n   reachable only from authorised administrative systems, so that a compromised\n   workstation cannot reach them.\n\n4. Restrict communication between workstations, as direct workstation-to-workstation\n   traffic is rarely required and is a primary mechanism of lateral movement.\n\n5. Log and monitor traffic crossing zone boundaries, so that lateral movement\n   attempts generate a signal that can be investigated.\n\n6. Validate the effectiveness of segmentation through periodic testing, as rules\n   added over time to resolve operational problems frequently erode the intended\n   boundaries.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1021/",
+                                                             "https://www.cisa.gov/news-events/cybersecurity-advisories/aa22-137a",
+                                                             "https://cwe.mitre.org/data/definitions/923.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cSOURCE_SEGMENT\u003e permits unrestricted access to \u003cDESTINATION_HOST\u003e (\u003cIP\u003e)"
+                                                                  ],
+                                          "cwe":  "CWE-923"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

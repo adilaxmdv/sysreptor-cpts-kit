@@ -1,0 +1,46 @@
+﻿{
+    "id":  "7d8b4da2-f3ca-4547-80a0-ab9d346a4b20",
+    "created":  "2026-09-17T10:25:51.106877Z",
+    "updated":  "2026-09-17T10:31:27.926418Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/7d8b4da2-f3ca-4547-80a0-ab9d346a4b20",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/7d8b4da2-f3ca-4547-80a0-ab9d346a4b20/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "hardening",
+                 "config",
+                 "infrastructure"
+             ],
+    "translations":  [
+                         {
+                             "id":  "d831713a-4f24-493d-9107-b19aea263602",
+                             "created":  "2026-09-17T10:25:51.107841Z",
+                             "updated":  "2026-09-17T10:25:51.110721Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  6.8,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Insecure Protocols in Use",
+                                          "cvss":  "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                                          "summary":  "Services transmitting credentials and data without encryption were in use across\nthe internal network, allowing an attacker with network access to intercept\nauthentication material and application content.",
+                                          "description":  "Services were identified transmitting data without encryption, including file\ntransfer, remote administration, directory, and web services. Protocols of this\ntype carry credentials and application data in a form directly readable by any\nparty able to observe the traffic.\n\nInterception does not require a privileged network position. Techniques such as\nname resolution poisoning and address resolution protocol spoofing allow an\nattacker on the same segment to place themselves in the path of traffic between\ntwo hosts, at which point cleartext content can be recorded in full.\n\nThe absence of encryption additionally removes any assurance of integrity.\nTraffic can be modified in transit as well as observed, permitting responses to\nbe altered and content to be injected into sessions.\n\nLegacy protocol versions were also observed, including SMB version 1, which\ncarries known vulnerabilities and lacks the protections present in later\nrevisions. Support for these versions is retained for compatibility with systems\nthat in many cases no longer exist in the environment.",
+                                          "impact":  "An attacker with access to the internal network could recover credentials and\nsensitive data from intercepted traffic without exploiting any software\nvulnerability. Credentials obtained this way are frequently valid for other\nsystems, providing a route to lateral movement, and the ability to modify traffic\nin transit permits content to be injected into otherwise legitimate sessions.",
+                                          "recommendation":  "1. Migrate all affected services to encrypted equivalents: SFTP or FTPS in place\n   of FTP, SSH in place of Telnet, HTTPS in place of HTTP, and LDAPS or LDAP with\n   StartTLS in place of unencrypted directory access.\n\n2. Disable the legacy protocol versions entirely once migration is complete,\n   rather than permitting them alongside their replacements, as clients will\n   otherwise continue to negotiate the weaker option.\n\n3. Remove SMB version 1 from all systems through Group Policy or the relevant\n   feature management interface.\n\n4. Enforce encryption at the server so that unencrypted connections are refused\n   rather than accepted as a fallback.\n\n5. Identify systems that genuinely require legacy protocol support, and where any\n   remain, isolate them at the network level and document the exception with a\n   review date.\n\n6. Monitor the network for cleartext authentication, which provides both a\n   verification that remediation is complete and detection of services\n   reintroduced later.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1040/",
+                                                             "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3",
+                                                             "https://cwe.mitre.org/data/definitions/319.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e:\u003cPORT\u003e) - \u003cPROTOCOL\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-319"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

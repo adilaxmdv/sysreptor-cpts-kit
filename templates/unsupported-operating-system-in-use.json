@@ -1,0 +1,47 @@
+﻿{
+    "id":  "9fee988a-2939-4ad2-a775-06002524fcb5",
+    "created":  "2026-09-17T10:21:36.213025Z",
+    "updated":  "2026-10-23T16:52:39.705303Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/9fee988a-2939-4ad2-a775-06002524fcb5",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/9fee988a-2939-4ad2-a775-06002524fcb5/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "windows",
+                 "linux",
+                 "config",
+                 "hardening"
+             ],
+    "translations":  [
+                         {
+                             "id":  "a31c5fb4-a4bd-42f5-bb2b-cdc39cc4b823",
+                             "created":  "2026-09-17T10:21:36.214009Z",
+                             "updated":  "2026-09-17T10:21:36.216259Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  9.8,
+                             "risk_level":  "critical",
+                             "data":  {
+                                          "title":  "Unsupported Operating System in Use",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "Systems were running operating system versions that have passed the end of their\nsupport lifecycle and no longer receive security updates from the vendor,\nleaving them permanently vulnerable.",
+                                          "description":  "Hosts within the environment were running operating system versions for which\nvendor support has ended. No security updates are issued for these products, so\nany vulnerability discovered after the end-of-support date remains unaddressed\nindefinitely.\n\nThis is not the same as a missing patch. A system missing an update can be\nremediated by applying it; an unsupported system cannot be remediated at all,\nbecause no fix exists or will be produced. The risk therefore increases\ncontinuously over time as new vulnerabilities are discovered in the unsupported\ncodebase.\n\nUnsupported versions also lack the security controls introduced in later\nreleases. Protections such as credential isolation, modern exploit mitigations,\nand improved authentication handling are unavailable, so attacks that fail\nagainst current systems succeed reliably against these hosts.\n\nBecause such systems are typically retained to support a legacy business\napplication, they are often connected to systems that hold current data,\nproviding an attacker with a route into the supported estate.",
+                                          "impact":  "The affected systems cannot be secured against vulnerabilities discovered after\ntheir end-of-support date and represent a permanent point of compromise within\nthe environment. An attacker reaching them could obtain complete control,\nextract credential material, and use them as a stable foothold from which to\nattack current systems, with the exposure increasing over time.",
+                                          "recommendation":  "1. Migrate the affected systems to a currently supported operating system version\n   according to a defined plan with committed dates.\n\n2. Where the business application prevents migration, engage the vendor regarding\n   a supported version, and where none exists, treat replacement of the\n   application as a business risk decision requiring formal acceptance at an\n   appropriate level.\n\n3. As an interim control, isolate the affected systems on a dedicated network\n   segment permitting only the specific connections the business function\n   requires, in both directions.\n\n4. Prevent privileged accounts from authenticating to these systems, as\n   credential material exposed on an unsupported host cannot be adequately\n   protected.\n\n5. Where the vendor offers extended security updates commercially, evaluate the\n   cost against the risk as a bridging measure, although such arrangements are\n   time-limited and do not remove the need to migrate.\n\n6. Maintain an inventory of operating system versions with their end-of-support\n   dates, and review it in advance so that migrations are planned rather than\n   reactive.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1210/",
+                                                             "https://learn.microsoft.com/en-us/lifecycle/",
+                                                             "https://cwe.mitre.org/data/definitions/1104.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e) - \u003cOS_VERSION\u003e, support ended \u003cDATE\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-1104"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

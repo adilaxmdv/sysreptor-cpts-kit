@@ -1,0 +1,44 @@
+﻿{
+    "id":  "5ae54ce9-de0f-4e31-b597-20c64aa27664",
+    "created":  "2026-09-17T10:38:19.768537Z",
+    "updated":  "2026-09-17T10:39:22.503241Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/5ae54ce9-de0f-4e31-b597-20c64aa27664",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/5ae54ce9-de0f-4e31-b597-20c64aa27664/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "web",
+                 "external",
+                 "internal"
+             ],
+    "translations":  [
+                         {
+                             "id":  "c74b740d-c70e-4155-a30a-7bf4a53b92fa",
+                             "created":  "2026-09-17T10:38:19.770533Z",
+                             "updated":  "2026-09-17T10:38:19.772313Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.1,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Insecure Direct Object Reference",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N",
+                                          "summary":  "The application referenced records by identifiers supplied in the request without\nverifying that the authenticated user was entitled to access them, allowing any\nuser to retrieve and modify other users\u0027 data.",
+                                          "description":  "The application identified records through values carried in the request, such as\na numeric record identifier in a URL path or a query parameter. Authentication\nwas enforced correctly, but no authorisation check was performed to confirm that\nthe record requested belonged to the authenticated user or fell within the scope\nof their role.\n\nAs a result, any authenticated user could access any record simply by altering\nthe identifier. Where identifiers were sequential, the full data set could be\nenumerated by incrementing the value; where they were less predictable, they\nremained retrievable from other parts of the application that disclosed them\nlegitimately.\n\nThe same weakness applied to operations that modify state. Requests to update or\ndelete a record succeeded regardless of ownership, extending the impact beyond\ndisclosure to unauthorised modification.\n\nControls that conceal the affected functionality from the user interface provide\nno protection, as the request is constructed directly rather than through the\ninterface.",
+                                          "impact":  "Any authenticated user could retrieve, modify, or delete records belonging to\nother users, including data classed as sensitive. Because the records are\nenumerable, an attacker holding a single valid account could extract the\napplication\u0027s entire data set, and the ability to modify records without\nauthorisation undermines the integrity of the data the business relies upon.",
+                                          "recommendation":  "1. Enforce an authorisation check on every request that references a record,\n   verifying against the authenticated session that the user is entitled to the\n   specific record and the specific operation requested.\n\n2. Implement the check server side within the data access layer, so that it\n   applies uniformly and cannot be omitted when new endpoints are added.\n\n3. Scope queries to the authenticated user where the business model permits,\n   retrieving records by owner and identifier together rather than by identifier\n   alone, so that an unauthorised request returns nothing.\n\n4. Replace sequential identifiers with values that cannot be guessed, as a\n   defence-in-depth measure. This raises the effort required for enumeration but\n   does not substitute for the authorisation check.\n\n5. Include authorisation testing in the development process, covering each\n   endpoint with a request issued by a user who should not have access.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1213/",
+                                                             "https://cwe.mitre.org/data/definitions/639.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-639"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

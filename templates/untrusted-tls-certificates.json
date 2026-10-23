@@ -1,0 +1,41 @@
+﻿{
+    "id":  "b03817c2-f7b2-4ea3-b061-b6fc64f058b7",
+    "created":  "2026-09-16T17:16:54.902617Z",
+    "updated":  "2026-10-23T16:53:18.303092Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/b03817c2-f7b2-4ea3-b061-b6fc64f058b7",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/b03817c2-f7b2-4ea3-b061-b6fc64f058b7/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "infrastructure",
+                 "external"
+             ],
+    "translations":  [
+                         {
+                             "id":  "fd0c7840-18a5-4ce1-8c0b-ef4af1c3bc6d",
+                             "created":  "2026-09-16T17:16:54.903441Z",
+                             "updated":  "2026-09-16T17:16:54.904251Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  4.8,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Untrusted TLS certificates",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+                                          "summary":  "Communication with the application at the transport layer level was not sufficiently protected due to untrusted TLS certificates. \nTLS is used by many protocols to ensure the confidentiality and integrity of communication between two endpoints. \nIf web browsers do not trust an application\u0027s TLS certificate, the application may be vulnerable to man-in-the-middle attacks \nand thus susceptible to eavesdropping or tampering with traffic. \nInsufficient protection at the transport layer may allow communications between two parties to be compromised by an untrusted third party. \nAn attacker could thus obtain sensitive data (e.g., credentials) if necessary. \nIn the event of a successful attack, an attacker could gain complete control over all functions \nand data of the application by compromising a privileged user account.\n",
+                                          "description":  "Transport Layer Security (TLS) is the successor to the now obsolete as well as insecure Secure Sockets Layer (SSL) protocol. \nTLS is a cryptographic protocol developed for secure, encrypted communication between two or more parties. \nThe protocol is used in a wide variety of areas, including e-mail, instant messaging, and voice-over-IP. \nThe best known use of TLS is on the Web, where it ensures secure communication over HTTPS. \nPrimarily, TLS aims to ensure confidentiality, integrity, \nbut also authenticity through the use of certificates, between two or more parties.\n\nWith TLS, the establishment of a secure connection takes place in several steps. \nClient and server agree on the use of TLS in the first step. \nThis is done either by selecting a specific port (e.g. 443 for HTTP) or by making a protocol-specific request to the server (e.g. STARTTLS for SMTP). \nA handshake procedure then begins, in which the client and server negotiate various parameters for the security of the communication link. \nThe handshake begins with the client and server agreeing on a respective supported cipher suite, consisting of the symmetric cipher and hash function. \nThe server then issues a digital certificate. \nThe certificate contains, among other things, the server name, the issuing certificate authority (CA), and the server\u0027s data asymmetric key. \nOnce the client has verified the validity of the certificate, it generates a symmetric session key for the secure connection. \nThis is done either by the client deriving a key from a random number. \nThe client encrypts the random number with the server\u0027s data key and sends the result to the server. \nThe server can use the private key to read the result and also derive the session key. \nHowever, the client and server could also use the Diffie-Hellman algorithm to securely agree on a random session key. \nDiffie-Hellman also offers the advantage of perfect forward secrecy (PFS). \nPFS prevents subsequent decryption once the server\u0027s private key is known. \nSession keys are not exchanged and thus cannot be reconstructed.\n\nThe security of TLS-secured communication is based primarily on the trustworthiness of the digital certificate. \nIf the trustworthiness is not given, for example because the certificate has expired, \nit contains an incorrect host name or it is a self-signed certificate, no secure key exchange between two endpoints can be guaranteed from the outset. \nIn some circumstances, the communication between two parties could be compromised by an untrusted third party in the course of a man-in-the-middle attack. \nFor example, an attacker could gain access to sensitive data or inject malicious data into the encrypted data stream to compromise either the client or the server.\n\nWe reviewed the TLS certificates of the applications in scope and found untrusted certificates for the following applications:\n\n| host | expired | expiring soon | incorrect host name | incomplete certificate chain | self-signed certificate |\n|:---:|:---:|:---:|:---:|:---:|:---:|\n| TODO:443 | - | - | - | - | - |\n",
+                                          "recommendation":  "* Acquire new certificates for services that do not have trusted TLS certificates. \n* Generate sufficiently strong asymmetric keys with at least 2048 bits for certificates and protect the private key.\n* Use only modern cryptographic hash algorithms such as SHA-256.\u0027\n* Make sure that the certificate contains the fully qualified name of the server. The following should also be considered when creating the certificate:\n    * Consider whether the \"www\" subdomain should also be included.\n    * Do not include unqualified host names in the certificate.\n    * Do not include IP addresses.\n    * Do not include internal domain names.\n* Create and use wildcard certificates only when there is a real need. Do not use wildcard certificates for convenience.\n* Choose an appropriate certificate authority that is trusted by all major browsers. For internal applications, an internal CA can be used. However, ensure that all users have imported the internal CA certificate and thus trust certificates issued by that CA. \n* Check the TLS configuration, including certificates, at regular intervals and adjust as necessary. There are a number of online tools (such as SSLabs, sslyze, etc) that you can use to quickly perform the check.\n* For more information and help on TLS certificates, see the linked Transport Layer Protection Cheat Sheet from OWASP.\n",
+                                          "short_recommendation":  "Ensure that TLS certificates used are universally valid and trusted. Acquire new certificates for the affected services, if necessary. Also, follow best practices recommendations for secure TLS server configuration.",
+                                          "references":  [
+                                                             "https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e:\u003cPORT\u003e"
+                                                                  ]
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

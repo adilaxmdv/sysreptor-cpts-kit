@@ -1,0 +1,44 @@
+﻿{
+    "id":  "65cc4eea-aa53-4cc3-802b-a01bc7b91219",
+    "created":  "2026-09-17T10:32:23.150685Z",
+    "updated":  "2026-10-23T16:52:38.484663Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/65cc4eea-aa53-4cc3-802b-a01bc7b91219",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/65cc4eea-aa53-4cc3-802b-a01bc7b91219/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "web",
+                 "external",
+                 "internal"
+             ],
+    "translations":  [
+                         {
+                             "id":  "95881d3d-fb79-4c4c-bea9-fe0db1bb57cd",
+                             "created":  "2026-09-17T10:32:23.152821Z",
+                             "updated":  "2026-09-17T10:32:23.160076Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  9.8,
+                             "risk_level":  "critical",
+                             "data":  {
+                                          "title":  "Local and Remote File Inclusion",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "The application incorporated user-supplied values into file path operations\nwithout validation, allowing arbitrary files to be read from the server and, in\nsome configurations, executed.",
+                                          "description":  "The application selected files to include or display based on a value supplied in\nthe request. Because the value was neither validated against a fixed set of\npermitted options nor constrained to an expected directory, traversal sequences\ncould be used to reference files elsewhere on the filesystem.\n\nThis permits the contents of arbitrary files readable by the application account\nto be retrieved, including application source code, configuration files\ncontaining database credentials, and operating system files that disclose user\naccounts and service configuration.\n\nWhere the referenced file is processed by a server-side interpreter rather than\nreturned as text, the impact extends to code execution. An attacker who can place\ncontent of their choosing anywhere on the filesystem (through an upload\nfunction, a log file that records request data, or a session store) can then\ncause that content to be executed by referencing it through the vulnerable\nparameter.\n\nWhere the platform permits inclusion of remote resources, an attacker can supply\na URL under their control, causing the application to retrieve and execute\nattacker-supplied code directly.",
+                                          "impact":  "An attacker could retrieve the application\u0027s source code and configuration,\nincluding credentials for databases and connected services, and enumerate the\noperating system configuration. Where the conditions for execution are present,\nthis extends to arbitrary code execution on the server, resulting in complete\ncompromise of the host and a foothold within the internal network.",
+                                          "recommendation":  "1. Avoid constructing file paths from user-supplied values. Where the request\n   must select between files, map the supplied value to a fixed internal\n   identifier through an allowlist, and reject anything not present in it.\n\n2. Where a path must be constructed, resolve it to its canonical form and verify\n   that the result falls within the intended directory before any file operation\n   is performed. Filtering traversal sequences from the input is insufficient, as\n   encoding variations defeat it.\n\n3. Disable the inclusion of remote resources in the platform configuration, as it\n   is rarely required and converts file inclusion directly into code execution.\n\n4. Restrict the application account\u0027s filesystem access so that it can read only\n   the directories it requires, limiting what is exposed should the controls\n   above fail.\n\n5. Store configuration files containing credentials outside the web root and with\n   permissions restricting them to the accounts that require them.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1083/",
+                                                             "https://cwe.mitre.org/data/definitions/98.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-98"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

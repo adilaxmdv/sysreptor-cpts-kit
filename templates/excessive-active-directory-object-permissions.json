@@ -1,0 +1,46 @@
+﻿{
+    "id":  "d43ae75c-c800-453e-b4c0-1df7a714af15",
+    "created":  "2026-09-17T09:57:07.765990Z",
+    "updated":  "2026-09-17T09:58:55.095341Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/d43ae75c-c800-453e-b4c0-1df7a714af15",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/d43ae75c-c800-453e-b4c0-1df7a714af15/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "ad",
+                 "internal",
+                 "windows",
+                 "config"
+             ],
+    "translations":  [
+                         {
+                             "id":  "cf7a03e0-f0c5-41d8-affd-fd40cd7e69a2",
+                             "created":  "2026-09-17T09:57:07.767110Z",
+                             "updated":  "2026-09-17T09:57:07.768433Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  8.8,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Excessive Active Directory Object Permissions",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "Standard domain accounts held permissions over privileged Active Directory\nobjects that allowed them to reset passwords, modify group membership, and\nultimately obtain administrative control of the domain.",
+                                          "description":  "Every object in Active Directory carries an access control list defining which\nsecurity principals may read and modify it. Rights such as GenericAll,\nGenericWrite, WriteDacl, WriteOwner, and ForceChangePassword permit the holder to\ntake control of the object they are granted over.\n\nPermissions of this type accumulate over time through delegation performed for\noperational convenience, through membership of nested groups, and through\napplication installations that request broad rights. Because they are not\nvisible in the standard administrative interface without inspecting each object\nindividually, they routinely remain in place long after the original business\nneed has ended.\n\nThe environment was found to contain permission chains allowing standard accounts\nto reach privileged objects through a sequence of such rights. Each individual\nstep appears to be a legitimate delegation; the risk arises from the chain as a\nwhole.\n\nExploitation requires no software vulnerability and no elevated privileges. The\nattacker uses the directory exactly as designed, which makes the activity\ndifficult to distinguish from normal administrative work.",
+                                          "impact":  "An attacker holding any standard domain account could escalate to full\nadministrative control of the Active Directory domain by following the permission\nchain, without exploiting a software vulnerability and without triggering\ncontrols that monitor for exploitation activity. This grants access to every\ndomain-joined system and the data it holds.",
+                                          "recommendation":  "1. Review the access control lists of all privileged objects, including\n   administrative groups, service accounts, domain controller computer objects,\n   and the domain object itself, and remove rights not required for current\n   operations.\n\n2. Map existing permission chains using an attack path analysis tool such as\n   BloodHound, and prioritise remediation of the chokepoints through which the\n   greatest number of paths pass.\n\n3. Delegate administrative rights through purpose-specific groups scoped to\n   organisational units, rather than granting rights directly to individual\n   accounts or to broad groups.\n\n4. Implement a tiered administration model so that accounts used to manage\n   workstations cannot be used to reach domain controllers.\n\n5. Enable auditing of directory object modification and alert on changes to\n   privileged group membership and to access control lists on sensitive objects.\n\n6. Repeat the attack path analysis on a recurring basis, as new permissions are\n   introduced continuously through normal operations.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1222/001/",
+                                                             "https://learn.microsoft.com/en-us/security/privileged-access-workstations/overview",
+                                                             "https://cwe.mitre.org/data/definitions/732.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cDOMAIN\u003e - \u003cPRINCIPAL\u003e holds \u003cRIGHT\u003e over \u003cTARGET_OBJECT\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-732"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

@@ -1,0 +1,40 @@
+﻿{
+    "id":  "7cfe1a28-ea82-47fa-b590-16049dc932ef",
+    "created":  "2026-09-16T17:16:54.891172Z",
+    "updated":  "2026-10-23T16:53:17.064359Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/7cfe1a28-ea82-47fa-b590-16049dc932ef",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/7cfe1a28-ea82-47fa-b590-16049dc932ef/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "web"
+             ],
+    "translations":  [
+                         {
+                             "id":  "c3af3dcb-218b-4453-b51f-acb35fd3e816",
+                             "created":  "2026-09-16T17:16:54.892165Z",
+                             "updated":  "2026-09-16T17:16:54.893405Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  5.3,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "User Enumeration",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+                                          "summary":  "The web application was vulnerable to a user enumeration vulnerability. \nUser enumeration is a common vulnerability in web applications that occurs when an attacker can use brute force techniques to determine valid user accounts in a system. \nAlthough user enumeration is a low risk in itself, it still provides an attacker with valuable information for follow-up attacks such as in brute force and credential stuffing attacks or in social engineering campaigns.\n",
+                                          "description":  "We were able to identify a user enumeration vulnerability in the web application, allowing us to determine valid user accounts using brute force techniques.\n\nThe endpoint `\u003cENDPOINT\u003e` at `\u003cURL\u003e` responds differently for existing and non-existing accounts. For a valid username the application returns `\u003cVALID_RESPONSE\u003e`. For an unknown username it returns `\u003cINVALID_RESPONSE\u003e`. The difference appears in the response body, status code, response length, or response time.\n\nWe automated the check with a username wordlist (for example with `ffuf` or Burp Intruder), filtered on the differing response, and identified `\u003cNUMBER\u003e` valid accounts, including `\u003cEXAMPLE_ACCOUNT\u003e`:\n\n```bash\nffuf -u \u003cURL\u003e -X POST -d \u0027username=FUZZ\u0026password=x\u0027 -w \u003cWORDLIST\u003e -fr \u0027\u003cINVALID_RESPONSE\u003e\u0027\n```\n\nThe application did not rate limit or block our requests during enumeration, so an attacker can test large lists of usernames quickly.\n\nOften, as a result of a faulty configuration or design decision, web applications indicate when a user already exists in the system. \nTwo of the most common areas where this occurs are the login page or the \"forgot password\" feature of a web application. \nOne example is when a user enters incorrect credentials, they receive information that the password they entered was incorrect. \nThe information obtained can now be used by an attacker to determine whether or not a particular username already exists. \nBy trial and error, an attacker can use it to determine a list of valid usernames. \n\nOnce an attacker has such a list, they can address these user accounts in new attacks to obtain valid credentials. \nIn its simplest form, an attacker could perform a brute force attack. \nIn this, an attacker tries to guess a user account\u0027s credentials by automatically trying through passwords. \nOften very large word lists containing frequently used passwords are used for this purpose. \nAn attacker could also use determined usernames to search past data leaks for passwords. \nCredentials from data leaks, consisting of pairs of usernames and passwords, can be reused by an attacker in an automated attack. \nThis particular form of brute force attack, is also known as credential stuffing. \nAlternatively, an attacker can use usernames in the course of social engineering campaigns to contact users directly.\n",
+                                          "recommendation":  "* Ensure that the web application always returns generic error messages when invalid usernames, passwords, or other credentials are entered. Identifies all relevant attack surfaces of the application for this purpose.\n* If the application defines usernames itself, user enumeration can be effectively prevented. The prerequisite for this is that user names are randomly generated so that they cannot be guessed.\n* The application can also use email addresses as usernames. If the username is not yet registered, an email message will contain a unique URL that can be used to complete the registration process. If the username exists, the user receives an email message with a URL to reset the password. In either case, an attacker cannot infer valid user accounts.\n* As an additional security measure, you could delete default system accounts as well as test accounts or rename them before releasing the system to production.\n",
+                                          "short_recommendation":  "Identify all application attack surfaces relevant to User Enumeration and ensures that the web application always returns generic error messages when invalid credentials are entered.",
+                                          "references":  [
+
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - \u003cENDPOINT\u003e"
+                                                                  ]
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

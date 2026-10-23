@@ -1,0 +1,41 @@
+﻿{
+    "id":  "95fa0f9c-eddb-4ac2-95bb-f9e80f1f0289",
+    "created":  "2026-09-16T17:16:54.929722Z",
+    "updated":  "2026-10-23T16:53:17.684364Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/95fa0f9c-eddb-4ac2-95bb-f9e80f1f0289",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/95fa0f9c-eddb-4ac2-95bb-f9e80f1f0289/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "web",
+                 "hardening"
+             ],
+    "translations":  [
+                         {
+                             "id":  "d2ffceff-94cf-4dc6-a7da-4020a8c677e8",
+                             "created":  "2026-09-16T17:16:54.930717Z",
+                             "updated":  "2026-09-16T17:16:54.931670Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  6.5,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Insecure HTTP cookies",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+                                          "summary":  "The issued HTTP cookies of the web application did not have the _HttpOnly_ and/or the _Secure_ cookie attribute set. \nIf the _HttpOnly_ attribute is not set, the affected cookie can be read or modified client-side using JavaScript. \nIf the _Secure_ attribute is not set, browsers also send the cookie over unencrypted HTTP connections. \nInsecurely configured cookies such as session cookies expand the potential attack surface of a web application. \nThey make it easier for an attacker to exploit client-side vulnerabilities such as cross-site scripting (XSS) or compromise sessions by trivially intercepting cookies.\n",
+                                          "description":  "HTTP is a stateless protocol, which means that it cannot distinguish requests from different users without an additional mechanism. \nTo address this problem, it requires a session mechanism. \nThe most commonly used mechanism for managing HTTP sessions in browsers is cookie storage. \nAn HTTP cookie is a small record that a server sends to a user\u0027s web browser. \nThe browser can store the cookie and send it back to the same server for subsequent requests. \nThis can be used to implement sessions for the stateless HTTP protocol. \nAn HTTP cookie can be used to distinguish requests from different users and to keep users logged in. \n\nCookies thus represent a frequent target for attackers. \nA web application should therefore harden the configuration of all sensitive cookies. \nThis can be achieved by setting the _Secure_ and _HttpOnly_ cookie attributes. \nA cookie with the _Secure_ attribute will only be sent to the server over HTTPS connections and never over an unsecured HTTP connection. \nA cookie with the _HttpOnly_ attribute set is inaccessible to JavaScript and thus helps mitigate cross-site scripting (XSS) attacks. \nIf an attacker is able to tap sensitive cookies such as session cookies, the attacker could take over user accounts and perform actions in the context of affected users. \nAn attacker may also be able to gain complete control over all web application functions and data if they take over a user account with privileged access.\n\nWe reviewed the set attributes of sensitive HTTP cookies of the web application. The following table provides an overview of the set attributes:\n\n| Cookie | Secure | HttpOnly |\n|:---:|:---:|:---:|\n| TODO | - | - |\n",
+                                          "recommendation":  "* Set the _Secure_ attribute for sensitive cookies. This attribute instructs a browser to send the cookie only over an encrypted HTTPS connection to prevent session ID disclosure through man-in-the-middle attacks.\n* If possible, also set the _HttpOnly_ attribute for sensitive cookies. This attribute prevents the cookie from being accessed client-side via JavaScript. This can make session hijacking by XSS attacks more difficult.\n",
+                                          "short_recommendation":  "Make sure that the configuration of all sensitive cookies is hardened and thus important cookie attributes like HttpOnly or Secure are set.",
+                                          "references":  [
+
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e"
+                                                                  ]
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

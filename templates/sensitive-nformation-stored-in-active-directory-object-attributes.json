@@ -1,0 +1,46 @@
+﻿{
+    "id":  "e7b248ab-54ce-4f5c-9965-e69affc43f98",
+    "created":  "2026-09-17T10:10:45.939172Z",
+    "updated":  "2026-09-17T10:18:05.717917Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/e7b248ab-54ce-4f5c-9965-e69affc43f98",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/e7b248ab-54ce-4f5c-9965-e69affc43f98/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "ad",
+                 "internal",
+                 "windows",
+                 "credentials"
+             ],
+    "translations":  [
+                         {
+                             "id":  "3a696e03-d7a9-4d01-b1b0-5278cc6ca715",
+                             "created":  "2026-09-17T10:10:45.940370Z",
+                             "updated":  "2026-09-17T10:10:45.941570Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  6.5,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Sensitive Information Stored in Active Directory Object Attributes",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+                                          "summary":  "Account passwords and other sensitive information were stored in Active Directory\nattributes that are readable by every authenticated user in the domain.",
+                                          "description":  "Active Directory objects carry a number of descriptive attributes, including\ndescription, info, comment, and userPassword. By default these attributes are\nreadable by any authenticated principal in the domain, as they are intended to\nhold operational information rather than secrets.\n\nAdministrators frequently record credentials in these fields for convenience,\nparticularly for service accounts and accounts used by legacy applications, on\nthe assumption that the directory itself constitutes a protected store. The\ninformation persists indefinitely and is not subject to the password policy,\nrotation schedule, or auditing applied to the credential it describes.\n\nRetrieval requires nothing more than a standard LDAP query using any valid domain\naccount. The query is indistinguishable from ordinary directory enumeration\nperformed by legitimate applications, so the activity is unlikely to be detected.\n\nAttributes containing credential material were identified within the environment.",
+                                          "impact":  "Any authenticated domain user could retrieve credentials for other accounts\nthrough a single directory query requiring no elevated privileges and no\nexploitation. Where the exposed accounts hold administrative or service\nprivileges, this provides a direct route to privilege escalation and lateral\nmovement across the environment.",
+                                          "recommendation":  "1. Remove all credential material and other sensitive information from directory\n   object attributes, and rotate every credential identified as exposed.\n\n2. Review the accounts concerned for evidence of unauthorised use, as the exposure\n   may predate this assessment by a considerable period.\n\n3. Store operational secrets in a dedicated credential management solution with\n   access control and audit logging, rather than in the directory.\n\n4. Restrict read access to descriptive attributes where the business does not\n   require them to be globally readable, applying directory permissions at the\n   organisational unit level.\n\n5. Establish a recurring automated audit of directory attributes for credential\n   patterns, as the practice tends to recur once established within an\n   administrative team.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1552/001/",
+                                                             "https://learn.microsoft.com/en-us/windows/win32/adschema/attributes-all",
+                                                             "https://cwe.mitre.org/data/definitions/522.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cDOMAIN\u003e - account: \u003cACCOUNT_NAME\u003e, attribute: \u003cATTRIBUTE_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-522"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

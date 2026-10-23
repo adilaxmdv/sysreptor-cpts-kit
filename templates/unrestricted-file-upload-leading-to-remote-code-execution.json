@@ -1,0 +1,45 @@
+﻿{
+    "id":  "a162aa2c-23d5-4669-8ec8-afc86e3cf6e6",
+    "created":  "2026-09-17T10:14:12.738643Z",
+    "updated":  "2026-10-23T16:52:40.133465Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/a162aa2c-23d5-4669-8ec8-afc86e3cf6e6",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/a162aa2c-23d5-4669-8ec8-afc86e3cf6e6/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "web",
+                 "external",
+                 "internal"
+             ],
+    "translations":  [
+                         {
+                             "id":  "7c2c36ce-6cb2-4997-927b-ea5fc36cfe12",
+                             "created":  "2026-09-17T10:14:12.740339Z",
+                             "updated":  "2026-09-17T10:14:12.741682Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  9.8,
+                             "risk_level":  "critical",
+                             "data":  {
+                                          "title":  "Unrestricted File Upload Leading to Remote Code Execution",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "An upload function accepted files of arbitrary type and stored them in a location\nfrom which the web server executed them, allowing arbitrary commands to be run on\nthe underlying host.",
+                                          "description":  "The application provided a file upload function intended for documents and\nimages. No validation was performed on the file extension, the declared content\ntype, or the file signature, and uploaded files were written to a directory\nwithin the web root that remained directly reachable over HTTP.\n\nAs a result, a file carrying an extension handled by the server-side interpreter\nwas executed rather than served as static content. This lets the uploader run arbitrary commands in the security context of the account under\nwhich the web service runs.\n\nWhere validation is implemented solely on the client, it provides no protection,\nas an attacker submits the request directly and never executes the client-side\ncode. Validation based on the declared content type is likewise ineffective,\nsince that value is supplied by the requester.\n\nThe issue was confirmed by uploading a file containing server-side code and\nobserving its execution.",
+                                          "impact":  "An attacker could execute arbitrary commands on the web server, obtaining access\nto the application\u0027s source code, configuration files, and any credentials they\ncontain, as well as the data held by connected systems. This establishes a\nfoothold within the internal network from which further systems can be attacked,\nand represents complete compromise of the affected host.",
+                                          "recommendation":  "1. Validate uploaded files against an allowlist of permitted extensions on the\n   server side. Deny by default and permit only the specific types the business\n   function requires; denylists are consistently bypassed.\n\n2. Verify the file signature rather than relying on the extension or the declared\n   content type, both of which are controlled by the requester.\n\n3. Store uploaded files outside the web root and serve them through a handler\n   that sets an appropriate content type and content disposition, so that the\n   server never interprets uploaded content as executable.\n\n4. Rename uploaded files to randomly generated values on receipt, discarding the\n   original name, to prevent extension manipulation and path traversal.\n\n5. Disable script execution in any directory that receives uploaded content\n   through web server configuration, as a defence-in-depth control.\n\n6. Run the web service under a dedicated low-privileged account with no rights\n   beyond those it requires, limiting the impact should the controls above fail.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1505/003/",
+                                                             "https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload",
+                                                             "https://cwe.mitre.org/data/definitions/434.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-434"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

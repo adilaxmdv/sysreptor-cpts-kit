@@ -1,0 +1,45 @@
+﻿{
+    "id":  "21af8db3-2506-44c6-941f-1acdb251fc76",
+    "created":  "2026-09-17T07:31:44.198373Z",
+    "updated":  "2026-09-17T10:49:28.278803Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/21af8db3-2506-44c6-941f-1acdb251fc76",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/21af8db3-2506-44c6-941f-1acdb251fc76/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "windows",
+                 "privesc"
+             ],
+    "translations":  [
+                         {
+                             "id":  "766ca0b9-1046-4826-8455-28b220d93113",
+                             "created":  "2026-09-17T07:31:44.199739Z",
+                             "updated":  "2026-09-17T07:31:44.201317Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.8,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Local Privilege Escalation via Impersonation Privileges",
+                                          "cvss":  "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "Service accounts on affected hosts held impersonation privileges that allowed any\ncompromised service context to escalate to full SYSTEM-level control of the\noperating system.",
+                                          "description":  "Accounts running web and database services on the affected hosts held the\nSeImpersonatePrivilege right. This privilege permits a process to assume the\nsecurity context of a client that connects to it.\n\nBy coercing a privileged process to authenticate to an attacker-controlled named\npipe or COM endpoint, a low-privileged service context can capture and impersonate\nthe SYSTEM token. The technique requires no software vulnerability and no patch\nexists, as the behaviour is by design; mitigation depends on configuration.",
+                                          "impact":  "Any compromise of an affected service - for example through a web application\nvulnerability - immediately becomes a full compromise of the host. SYSTEM access\npermits the extraction of cached credentials and password hashes from memory,\ninstallation of persistence, and disabling of security controls, providing the\nattacker with material to move laterally through the network.",
+                                          "recommendation":  "1. Review which accounts hold SeImpersonatePrivilege and SeAssignPrimaryTokenPrivilege\n   and remove the right from any account that does not strictly require it.\n\n2. Run application and database services under low-privileged, purpose-specific\n   accounts rather than built-in service identities where the application supports it.\n\n3. Apply all available operating system security updates, as several coercion\n   techniques used to trigger this escalation have been addressed by patches.\n\n4. Deploy endpoint detection capable of identifying named pipe impersonation and\n   anomalous token manipulation.\n\n5. Reduce the likelihood of initial service compromise by remediating the\n   application-level vulnerabilities documented elsewhere in this report.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1134/001/",
+                                                             "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/impersonate-a-client-after-authentication",
+                                                             "https://cwe.mitre.org/data/definitions/269.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e) - service account: \u003cACCOUNT\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-269"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

@@ -1,0 +1,232 @@
+﻿[
+    {
+        "file":  "weak-account-passwords-recovered-through-password-spraying.json",
+        "title":  "Weak Account Passwords Recovered Through Password Spraying",
+        "tags":  "ad, internal, windows, credentials"
+    },
+    {
+        "file":  "local-and-remote-file-nclusion.json",
+        "title":  "Local and Remote File Inclusion",
+        "tags":  "web, external, internal"
+    },
+    {
+        "file":  "unsupported-operating-system-in-use.json",
+        "title":  "Unsupported Operating System in Use",
+        "tags":  "internal, windows, linux, config, hardening"
+    },
+    {
+        "file":  "missing-operating-system-security-updates.json",
+        "title":  "Missing Operating System Security Updates",
+        "tags":  "internal, windows, linux, hardening, config"
+    },
+    {
+        "file":  "default-credentials-on-administrative-web-nterface.json",
+        "title":  "Default Credentials on Administrative Web Interface",
+        "tags":  "web, internal, config, credentials"
+    },
+    {
+        "file":  "operating-system-command-njection.json",
+        "title":  "Operating System Command Injection",
+        "tags":  "web, external, internal"
+    },
+    {
+        "file":  "unrestricted-file-upload-leading-to-remote-code-execution.json",
+        "title":  "Unrestricted File Upload Leading to Remote Code Execution",
+        "tags":  "web, external, internal"
+    },
+    {
+        "file":  "default-or-weak-service-credentials.json",
+        "title":  "Default or Weak Service Credentials",
+        "tags":  "internal, config, credentials"
+    },
+    {
+        "file":  "sql-njection-sqli.json",
+        "title":  "SQL Injection (SQLi)",
+        "tags":  "web"
+    },
+    {
+        "file":  "server-side-request-forgery.json",
+        "title":  "Server-Side Request Forgery",
+        "tags":  "web, external, internal"
+    },
+    {
+        "file":  "weak-active-directory-password-policy.json",
+        "title":  "Weak Active Directory Password Policy",
+        "tags":  "internal, windows, ad, credentials, config"
+    },
+    {
+        "file":  "active-directory-domain-trust-exploitation.json",
+        "title":  "Active Directory Domain Trust Exploitation",
+        "tags":  "ad, internal, windows, config"
+    },
+    {
+        "file":  "lateral-movement-via-pass-the-hash-and-pass-the-ticket.json",
+        "title":  "Lateral Movement via Pass-the-Hash and Pass-the-Ticket",
+        "tags":  "ad, internal, windows, credentials, lateral"
+    },
+    {
+        "file":  "dcsync-replication-of-domain-credentials.json",
+        "title":  "DCSync - Replication of Domain Credentials",
+        "tags":  "ad, internal, windows, credentials"
+    },
+    {
+        "file":  "nsecure-kerberos-delegation-configuration.json",
+        "title":  "Insecure Kerberos Delegation Configuration",
+        "tags":  "ad, internal, windows, config"
+    },
+    {
+        "file":  "nsecure-active-directory-certificate-services-template-configuration.json",
+        "title":  "Insecure Active Directory Certificate Services Template Configuration",
+        "tags":  "ad, internal, windows, config, credentials"
+    },
+    {
+        "file":  "local-administrator-password-reuse.json",
+        "title":  "Local Administrator Password Reuse",
+        "tags":  "ad, internal, windows, credentials, config"
+    },
+    {
+        "file":  "excessive-active-directory-object-permissions.json",
+        "title":  "Excessive Active Directory Object Permissions",
+        "tags":  "ad, internal, windows, config"
+    },
+    {
+        "file":  "credentials-stored-in-group-policy-preferences.json",
+        "title":  "Credentials Stored in Group Policy Preferences",
+        "tags":  "ad, internal, windows, credentials, config"
+    },
+    {
+        "file":  "cleartext-credentials-stored-in-files-and-network-shares.json",
+        "title":  "Cleartext Credentials Stored in Files and Network Shares",
+        "tags":  "internal, windows, credentials, ad"
+    },
+    {
+        "file":  "kerberoasting-service-accounts-with-weak-passwords.json",
+        "title":  "Kerberoasting - Service Accounts with Weak Passwords",
+        "tags":  "ad, internal, windows, credentials"
+    },
+    {
+        "file":  "broken-access-control-on-administrative-functionality.json",
+        "title":  "Broken Access Control on Administrative Functionality",
+        "tags":  "web, external, internal"
+    },
+    {
+        "file":  "nsufficient-network-segmentation.json",
+        "title":  "Insufficient Network Segmentation",
+        "tags":  "internal, infrastructure, hardening, config"
+    },
+    {
+        "file":  "local-privilege-escalation-via-misconfigured-windows-services.json",
+        "title":  "Local Privilege Escalation via Misconfigured Windows Services",
+        "tags":  "internal, windows, privesc, config"
+    },
+    {
+        "file":  "local-privilege-escalation-via-sudo-misconfiguration.json",
+        "title":  "Local Privilege Escalation via Sudo Misconfiguration",
+        "tags":  "internal, linux, config, privesc"
+    },
+    {
+        "file":  "local-privilege-escalation-via-mpersonation-privileges.json",
+        "title":  "Local Privilege Escalation via Impersonation Privileges",
+        "tags":  "internal, windows, privesc"
+    },
+    {
+        "file":  "exposed-sensitive-files-and-directory-listing.json",
+        "title":  "Exposed Sensitive Files and Directory Listing",
+        "tags":  "web, external, internal, config, hardening"
+    },
+    {
+        "file":  "as-rep-roasting-accounts-without-kerberos-pre-authentication.json",
+        "title":  "AS-REP Roasting - Accounts Without Kerberos Pre-Authentication",
+        "tags":  "ad, internal, windows, credentials"
+    },
+    {
+        "file":  "xml-external-entity-njection-xxe.json",
+        "title":  "XML External Entity Injection (XXE)",
+        "tags":  "web"
+    },
+    {
+        "file":  "llmnr-and-nbt-ns-poisoning-leading-to-credential-capture.json",
+        "title":  "LLMNR and NBT-NS Poisoning Leading to Credential Capture",
+        "tags":  "internal, windows, ad, credentials"
+    },
+    {
+        "file":  "stored-cross-site-scripting-xss.json",
+        "title":  "Stored Cross-Site Scripting (XSS)",
+        "tags":  "web"
+    },
+    {
+        "file":  "nsecure-direct-object-reference.json",
+        "title":  "Insecure Direct Object Reference",
+        "tags":  "web, external, internal"
+    },
+    {
+        "file":  "smb-message-signing-not-required.json",
+        "title":  "SMB Message Signing Not Required",
+        "tags":  "internal, ad, hardening, windows"
+    },
+    {
+        "file":  "nsecure-protocols-in-use.json",
+        "title":  "Insecure Protocols in Use",
+        "tags":  "internal, hardening, config, infrastructure"
+    },
+    {
+        "file":  "credential-extraction-from-compromised-hosts.json",
+        "title":  "Credential Extraction from Compromised Hosts",
+        "tags":  "internal, windows, credentials, privesc"
+    },
+    {
+        "file":  "excessive-permissions-on-network-file-shares.json",
+        "title":  "Excessive Permissions on Network File Shares",
+        "tags":  "internal, windows, ad, hardening"
+    },
+    {
+        "file":  "sensitive-nformation-stored-in-active-directory-object-attributes.json",
+        "title":  "Sensitive Information Stored in Active Directory Object Attributes",
+        "tags":  "ad, internal, windows, credentials"
+    },
+    {
+        "file":  "nsecure-http-cookies.json",
+        "title":  "Insecure HTTP cookies",
+        "tags":  "web, hardening"
+    },
+    {
+        "file":  "cross-site-request-forgery-csrf.json",
+        "title":  "Cross-Site Request Forgery (CSRF)",
+        "tags":  "web"
+    },
+    {
+        "file":  "disclosure-of-sensitive-data-in-url-parameters.json",
+        "title":  "Disclosure of sensitive data in URL parameters",
+        "tags":  "web"
+    },
+    {
+        "file":  "ncorrectly-configured-http-security-headers.json",
+        "title":  "Incorrectly configured HTTP security headers",
+        "tags":  "web"
+    },
+    {
+        "file":  "nsufficient-logging-and-monitoring.json",
+        "title":  "Insufficient Logging and Monitoring",
+        "tags":  "internal, hardening, config, infrastructure"
+    },
+    {
+        "file":  "anonymous-enumeration-of-domain-nformation-permitted.json",
+        "title":  "Anonymous Enumeration of Domain Information Permitted",
+        "tags":  "ad, internal, windows, hardening, config"
+    },
+    {
+        "file":  "user-enumeration.json",
+        "title":  "User Enumeration",
+        "tags":  "web"
+    },
+    {
+        "file":  "untrusted-tls-certificates.json",
+        "title":  "Untrusted TLS certificates",
+        "tags":  "infrastructure, external"
+    },
+    {
+        "file":  "session-management-weaknesses.json",
+        "title":  "Session management weaknesses",
+        "tags":  "web, hardening, external, config"
+    }
+]

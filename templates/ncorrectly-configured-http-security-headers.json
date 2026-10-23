@@ -1,0 +1,40 @@
+﻿{
+    "id":  "73473f69-dfc4-4f03-a5a1-1bcf210067da",
+    "created":  "2026-09-16T17:16:54.907733Z",
+    "updated":  "2026-10-23T16:53:16.747763Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/73473f69-dfc4-4f03-a5a1-1bcf210067da",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/73473f69-dfc4-4f03-a5a1-1bcf210067da/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "web"
+             ],
+    "translations":  [
+                         {
+                             "id":  "140b0c42-203c-49a9-921a-b6e5ad2c6fdf",
+                             "created":  "2026-09-16T17:16:54.908485Z",
+                             "updated":  "2026-09-16T17:16:54.909823Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  5.4,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Incorrectly configured HTTP security headers",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:N",
+                                          "summary":  "The web application did not have important HTTP security headers set or they were configured insecurely. \nHTTP security headers are a good way to increase the security of a web application. \nThey can help make vulnerabilities such as cross-site scripting, clickjacking, information disclosure, and others more difficult or even prevent them altogether. \nWithout proper HTTP security headers, the potential attack surface of a web application is larger and makes it easier for an attacker to exploit client-side vulnerabilities.\n",
+                                          "description":  "We checked the HTTP security headers of the examined web application. \nThe following table provides an overview of which headers were set correctly and which were not:\n\n| Host | Content-Security Policy (CSP) | Referrer-Policy | HTTP-Strict-Transport-Security (HSTS) | X-Content-Type-Options | X-Frame-Options | Permissions-Policy | X-XSS-Protection |\n|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| TODO | - | - | - | - | - | - | - |\n\nModern browsers support several HTTP security headers that can increase the security of web applications against client-side vulnerabilities such as clickjacking, cross-site scripting, and other common attacks. \nHTTP Security headers are response headers that specify whether and which security measures should be enabled or disabled in the web browser. \nThese HTTP headers are exchanged between a browser and a server and specify the security-related details of HTTP communication. \nBelow is a brief description and overview of the most important current HTTP security headers:\n\n* **Content Security Policy**.\nThe Content Security Policy (CSP) HTTP header allows fine-grained control over what resources a browser is allowed to obtain. \nThe CSP header is a very effective measure to prevent the exploitation of cross-site scripting (XSS) vulnerabilities.\n\n* **Referrer Policy**.\nThe `Referrer-Policy` header determines how and when browsers transmit the HTTP Referer (sic) header. \nIn the Referer header, a browser informs a target page about the origin of an HTTP request, for example, when a user navigates to a specific page via a link or loads an external resource.\n\n* **HTTP Strict Transport Security (HSTS)**.\nWith the HSTS header, a web page instructs the browser to connect only over HTTPS. \nAll unencrypted HTTP requests are transparently redirected in the process. \nTLS and certificate-related errors are also handled more strictly by preventing users from bypassing the error page.\n\n* **X-Content-Type-Options**.\nThe `X-Content-Type-Options` header specifies that browsers will only load scripts and stylesheets if the server specifies the correct MIME type. \nWithout this header, there is a risk of MIME sniffing. \nThis means that browsers will misrecognize files as scripts and stylesheets, which could lead to XSS attacks.\n\n* **X-Frame-Options**\n`X-Frame-Options` are used to determine if and in which form the web page can be embedded in an iframe. \nClickjacking is a viable attack that can exploit such embedding in an `iframe`. \nIn such an attack, an attacker overlays the rendering of a legitimate page to then cause users to perform seemingly innocuous interactions (e.g., mouse clicks and/or keystrokes).\n\n* **Permissions policy**\nPermissions policy allows web developers to selectively enable, disable, and modify the behavior of certain features and APIs in the browser. \n`Permissions-Policy` is similar to Content Security Policy, but controls specific functions of the browser rather than security behavior.\n\n* **X-XSS-Protection**\n`X-XSS-Protection` is a feature that prevents pages from loading when a browser detects Reflected Cross-Site Scripting (XSS) attacks. \nThis header is obsolete when using modern browsers, provided that a secure content security policy has been defined.\n",
+                                          "recommendation":  "* Do not allow the web page to be included in a frame. Set `X-Frame-Options: DENY` for this. Alternatively you can restrict this setting to the same-origin with `X-Frame-Options: SAMEORIGIN`.\n* Set the header `X-XSS-Protection` explicitly with `X-XSS-Protection: 1; mode=block`.\n* Prevent the browser from guessing the MIME type based on the content of the resource. Set the `X-Content-Type-Options` header with the `nosniff` option.\n* Restrict the `referrer policy` to prevent potentially sensitive information from being exposed to third party sites. You should define the header as follows: `Referrer-Policy: strict-origin-when-cross-origin`.\n* Configure the `Strict-Transport-Security` header so that your web application can only be accessed over a secured HTTPS connection. You should set the header like this: `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`.\n* If possible, define a Content Security Policy (CSP) for your web application. CSP is an additional security measure that can make it much more difficult to exploit client-side vulnerabilities. Details on how to configure it securely can be found in the resources.\n* Restrict the use of sensitive browser features such as the camera, microphone or speaker using \u0027Permissions Policy\u0027 headers.\n",
+                                          "short_recommendation":  "Follow best practices recommendations for configuring HTTP security headers and implement them for your web application if possible.",
+                                          "references":  [
+                                                             "https://infosec.mozilla.org/guidelines/web_security#content-security-policy"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e"
+                                                                  ]
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

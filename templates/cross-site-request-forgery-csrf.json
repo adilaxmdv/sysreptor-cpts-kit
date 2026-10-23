@@ -1,0 +1,40 @@
+﻿{
+    "id":  "a8c664fc-f6fc-4193-821b-a0269725d6fe",
+    "created":  "2026-09-16T17:16:54.914095Z",
+    "updated":  "2026-10-23T16:53:17.979739Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/a8c664fc-f6fc-4193-821b-a0269725d6fe",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/a8c664fc-f6fc-4193-821b-a0269725d6fe/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "web"
+             ],
+    "translations":  [
+                         {
+                             "id":  "aad5cb6c-05fc-42dc-952f-ae177e90b78e",
+                             "created":  "2026-09-16T17:16:54.914881Z",
+                             "updated":  "2026-09-16T17:16:54.915900Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  6.5,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Cross-Site Request Forgery (CSRF)",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:N",
+                                          "summary":  "The web application was vulnerable to Cross-Site Request Forgery (CSRF). \nCSRF is an attack that causes users to unknowingly send an HTTP request to a web application to which they are currently authenticated. \nAttackers can thereby partially bypass a web browser\u0027s same-origin policy and perform state-changing actions in the context of an affected user. \nDepending on the nature of the action, the attacker can gain complete control over the user\u0027s account. \nIf the user account is administrative, CSRF may also be able to compromise the entire web application.\n",
+                                          "description":  "We identified a CSRF vulnerability in the web application, allowing an attacker to perform actions in the context of another user.\n\nThe function `\u003cFUNCTION_NAME\u003e` at `\u003cURL\u003e` changes application state through a `\u003cMETHOD\u003e` request. The request carries no anti-CSRF token, and the application does not check the `Origin` or `Referer` header. Authentication relies solely on the session cookie, which the browser attaches to cross-site requests (`SameSite` is not set or is `None`).\n\nWe reproduced the attack with the following page hosted on a different origin. When a logged-in user opens it, the browser submits the request with the victim\u0027s cookie and the application executes the action:\n\n```html\n\u003cform action=\"\u003cURL\u003e\" method=\"POST\" id=\"csrf\"\u003e\n  \u003cinput type=\"hidden\" name=\"\u003cPARAMETER_NAME\u003e\" value=\"\u003cVALUE\u003e\"\u003e\n\u003c/form\u003e\n\u003cscript\u003edocument.getElementById(\u0027csrf\u0027).submit();\u003c/script\u003e\n```\n\nThe server processed the forged request and returned `\u003cRESULT\u003e`. The request contains no value the attacker cannot predict, so exploitation requires only that the victim visits an attacker-controlled page while logged in.\n\nCross-site request forgery (CSRF) is a web security vulnerability in which an attacker can trick an authenticated user into unknowingly sending a state-changing HTTP request to the vulnerable web application. \nIn CSRF, an attacker assumes the victim\u0027s identity and access privileges to perform unwanted actions (e.g., change email address) on their behalf. \nWithout appropriate CSRF protection, the web application has no way to distinguish between a request prepared by the attacker and a legitimate request from the victim.\n\nSeveral prerequisites must be in place for a CSRF attack to take place. \nFirst, there must be an action in the web application that is relevant to an attacker and makes sense to exploit. \nFor example, this could be a privileged action, such as changing a user\u0027s access permissions or changing a password. \nAnother requirement is that there is no other mechanism besides cookie-based authentication to distinguish HTTP requests from different users. \nIf the user is authenticated and thus has a valid session cookie, the web application thus has no way to distinguish between a malicious, subverted request from the attacker and a legitimate request from the victim. \nLast, it must be ensured that actions do not require specific parameters whose values an attacker cannot determine or predict. \nFor example, if a user is asked to change his password, the function is not vulnerable if an attacker needs to know the value of the existing password.\n\nA common way to exploit CSRF vulnerabilities is through phishing emails. \nAn attacker does this by preparing malicious links with the intention of foisting a state-changing request on the victim. \nThe attacker then distributes the malicious links to victims via email. \nWhen a user opens the link in a web browser and is authenticated to it, the request is sent to the vulnerable web application. \nIf successful, the attack causes an action with the victim\u0027s identity and privilege level.\n",
+                                          "recommendation":  "* Check if the framework has built-in CSRF protection and use it. If not, ensure that all state-changing requests contain a randomly generated CSRF token with high entropy. Also ensure that CSRF tokens are properly validated on the backend.\n* Consider various additional security measures:\n    * For example, set the SameSite attribute for session cookies. Web browsers decide whether to include cookies in cross-site requests based on this attribute.\n    * Use Custom Request Headers. By default, the browser\u0027s same-origin policy restricts JavaScript from submitting cross-site requests with custom request headers.\n    * For highly sensitive actions, user interactions such as CAPTCHAs, one-time tokens, re-authentication, etc. can also be considered as additional CSRF protection. \n* Detailed information and assistance on how to prevent CSRF vulnerabilities can be found in the linked Cross-Site Request Forgery Cheat Sheet from OWASP.\n",
+                                          "short_recommendation":  "Make sure that randomly generated CSRF tokens with high entropy are included in all state-changing HTTP requests and validated in the backend.",
+                                          "references":  [
+                                                             "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - \u003cFUNCTION_NAME\u003e"
+                                                                  ]
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

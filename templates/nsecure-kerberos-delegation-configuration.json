@@ -1,0 +1,46 @@
+﻿{
+    "id":  "2d10f0d0-ad13-45fa-91d6-8398b8341d74",
+    "created":  "2026-09-17T10:02:08.958242Z",
+    "updated":  "2026-10-23T16:52:58.867374Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/2d10f0d0-ad13-45fa-91d6-8398b8341d74",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/2d10f0d0-ad13-45fa-91d6-8398b8341d74/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "ad",
+                 "internal",
+                 "windows",
+                 "config"
+             ],
+    "translations":  [
+                         {
+                             "id":  "1daaf35d-8725-42da-ad2a-691f80c13201",
+                             "created":  "2026-09-17T10:02:08.959956Z",
+                             "updated":  "2026-09-17T10:02:08.961892Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  8.8,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Insecure Kerberos Delegation Configuration",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "Systems and service accounts were configured with Kerberos delegation rights that\nallowed authentication material belonging to privileged users to be captured and\nreused.",
+                                          "description":  "Kerberos delegation permits a service to act on behalf of a user when accessing a\nfurther back-end service, a requirement for multi-tier applications. The security\nof the mechanism depends heavily on which form of delegation is configured.\n\nWhere unconstrained delegation is enabled, any user authenticating to the affected\nhost has a copy of their ticket-granting ticket cached in the memory of that\nsystem. An attacker holding administrative access to the host can extract those\ntickets and reuse them to authenticate as the users concerned. The exposure is\nnot limited to services the host legitimately requires, as the cached ticket\ngrants access to any service in the domain.\n\nAn attacker can coerce a privileged system, including a domain\ncontroller, into authenticating to the affected host, causing its ticket to be\ncached and captured without waiting for a user to connect.\n\nWhere constrained delegation is configured with protocol transition, the account\nmay request tickets on behalf of any user without that user having authenticated\nat all, extending the exposure to accounts that never interact with the service.\n\nHosts and accounts with delegation configured were identified within the\nenvironment, and were not restricted by the mechanisms available to limit the\nassociated risk.",
+                                          "impact":  "An attacker with administrative access to an affected host could capture and reuse\nthe authentication material of privileged users, including domain administrators,\nwithout recovering any password. Where a domain controller can be coerced into\nauthenticating, this results in full domain compromise from a single compromised\nserver.",
+                                          "recommendation":  "1. Remove unconstrained delegation from all accounts and computers. Where\n   delegation is genuinely required, migrate to resource-based constrained\n   delegation, which places control with the target resource rather than the\n   requesting service.\n\n2. Add all privileged accounts to the Protected Users security group and set the\n   \"Account is sensitive and cannot be delegated\" flag, which prevents their\n   tickets from being delegated under any configuration.\n\n3. Treat any host holding delegation rights as a tier-zero asset, applying the\n   same hardening, monitoring, and administrative restrictions as a domain\n   controller.\n\n4. Disable the Print Spooler service on domain controllers and other systems\n   where it is not required, as it is commonly used to coerce authentication.\n\n5. Audit delegation configuration on a recurring basis, as the settings are\n   frequently applied during application deployment and rarely reviewed\n   afterwards.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1558/",
+                                                             "https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-constrained-delegation-overview",
+                                                             "https://cwe.mitre.org/data/definitions/269.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e) - \u003cDELEGATION_TYPE\u003e delegation configured"
+                                                                  ],
+                                          "cwe":  "CWE-269"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

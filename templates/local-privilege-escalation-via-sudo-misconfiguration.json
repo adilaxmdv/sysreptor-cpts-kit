@@ -1,0 +1,46 @@
+﻿{
+    "id":  "477a3a61-a400-43db-8275-5dd547d0611a",
+    "created":  "2026-09-17T10:22:58.096282Z",
+    "updated":  "2026-09-17T10:23:51.661092Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/477a3a61-a400-43db-8275-5dd547d0611a",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/477a3a61-a400-43db-8275-5dd547d0611a/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "linux",
+                 "config",
+                 "privesc"
+             ],
+    "translations":  [
+                         {
+                             "id":  "5d9a064d-4be1-4cfb-a9c4-c1de8d4a5d50",
+                             "created":  "2026-09-17T10:22:58.097614Z",
+                             "updated":  "2026-09-17T10:22:58.099555Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.8,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Local Privilege Escalation via Sudo Misconfiguration",
+                                          "cvss":  "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "The sudo configuration permitted standard users to execute commands as root that\nprovide a route to an interactive shell, allowing complete control of the\naffected hosts.",
+                                          "description":  "The sudo configuration on the affected systems granted standard user accounts the\nability to run specific commands with root privileges. The intention in such\nconfigurations is to delegate a narrow administrative task without granting full\nadministrative access.\n\nThe commands permitted, however, provide functionality that can be used to obtain\nan interactive shell. A wide range of ordinary utilities offer this capability\ndirectly or indirectly, including editors that can spawn subprocesses,\ninterpreters that execute arbitrary code, pagers that invoke a shell, archive\ntools that execute filters, and any utility accepting a user-controlled\nconfiguration file. Where such a command is permitted, the delegation is\nequivalent to granting unrestricted root access.\n\nThe use of wildcards in the configuration extends this further, as the pattern\nfrequently matches argument combinations the author did not anticipate, including\npaths that permit arbitrary files to be read or written as root.\n\nWhere the NOPASSWD directive is also present, escalation requires no knowledge of\nthe user\u0027s own password, so any compromise of the account - including through a\nservice running under it - immediately becomes full compromise of the host.\n\nEscalation to root was confirmed during testing.",
+                                          "impact":  "An attacker holding access to any affected user account could obtain complete\ncontrol of the host. This permits access to all data held on the system, the\nrecovery of credentials stored in configuration files and process memory, the\ninstallation of persistence, and the modification of logs to conceal the\nactivity. Where credentials recovered are valid elsewhere, the compromise extends\nbeyond the affected host.",
+                                          "recommendation":  "1. Review the sudo configuration on all systems and remove entries granting\n   commands that can be used to obtain a shell or to read and write arbitrary\n   files as root.\n\n2. Verify each permitted command against a reference of known escalation\n   techniques, such as the GTFOBins project, before including it in the\n   configuration.\n\n3. Avoid wildcards in command specifications. Where a task requires arguments\n   that vary, implement it as a dedicated script owned by root and not writable\n   by the delegated user, and grant sudo access to that script alone.\n\n4. Remove the NOPASSWD directive except where a documented operational\n   requirement exists, so that escalation requires the user\u0027s own password.\n\n5. Enable sudo command logging and forward the logs to a central system outside\n   the host, so that a compromise of the host does not permit the record to be\n   altered.\n\n6. Review delegations periodically, as sudo entries added to resolve a specific\n   operational problem are rarely removed once the problem has passed.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1548/003/",
+                                                             "https://gtfobins.github.io/",
+                                                             "https://cwe.mitre.org/data/definitions/269.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e) - user \u003cUSERNAME\u003e permitted to run \u003cCOMMAND\u003e as root"
+                                                                  ],
+                                          "cwe":  "CWE-269"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

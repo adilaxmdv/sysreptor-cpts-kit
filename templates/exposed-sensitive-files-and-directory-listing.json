@@ -1,0 +1,46 @@
+﻿{
+    "id":  "50360996-4d48-4d5a-a046-a2ac3036d723",
+    "created":  "2026-09-17T10:39:34.685282Z",
+    "updated":  "2026-09-17T10:44:10.516255Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/50360996-4d48-4d5a-a046-a2ac3036d723",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/50360996-4d48-4d5a-a046-a2ac3036d723/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "web",
+                 "external",
+                 "internal",
+                 "config",
+                 "hardening"
+             ],
+    "translations":  [
+                         {
+                             "id":  "09291cfd-25d3-4d37-bd5b-4ee98f3115b3",
+                             "created":  "2026-09-17T10:39:34.686368Z",
+                             "updated":  "2026-09-17T10:39:34.687447Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.5,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Exposed Sensitive Files and Directory Listing",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                                          "summary":  "Web servers disclosed directory contents and served files not intended for public\naccess, including version control data, backups, and configuration files\ncontaining credentials.",
+                                          "description":  "Directory listing was enabled on the affected web servers, causing the contents of\ndirectories without an index file to be returned to any requester. This removes\nthe need for an attacker to guess filenames and provides a complete inventory of\nthe material present.\n\nFiles not intended to be served were additionally reachable. These included\nversion control metadata, from which the full source code history can be\nreconstructed; backup and temporary copies of source files, which are returned as\ntext rather than executed and therefore disclose their contents including\nembedded credentials; and configuration files containing database connection\ndetails and application secrets.\n\nMaterial of this type accumulates through ordinary development and deployment\nactivity. Editors create backup copies, deployments leave version control\ndirectories in place, and administrators place archives in the web root for\ntransfer and do not remove them.\n\nThe information disclosed frequently enables further attack. Source code reveals\nthe application\u0027s logic and validation, allowing weaknesses to be identified\nwithout testing, and credentials recovered from configuration are commonly valid\nfor databases and other systems.",
+                                          "impact":  "An unauthenticated attacker could retrieve the application\u0027s source code,\nconfiguration, and backup data, disclosing credentials for databases and\nconnected systems. Access to source code substantially reduces the effort\nrequired to identify further vulnerabilities, and recovered credentials\nfrequently provide direct access to systems beyond the web server itself.",
+                                          "recommendation":  "1. Disable directory listing in the web server configuration globally, enabling\n   it only where a documented business requirement exists.\n\n2. Remove version control directories, backup files, archives, and any other\n   material not required for the application to function from the web root.\n\n3. Configure the web server to deny requests for file extensions and directory\n   names associated with development artefacts, so that material reintroduced by\n   a future deployment is not served.\n\n4. Store configuration files containing credentials outside the web root, and\n   rotate any credential identified as exposed.\n\n5. Introduce a deployment process that publishes only the files the application\n   requires, rather than synchronising a working directory, as this prevents the\n   condition from recurring.\n\n6. Scan the application\u0027s exposed content periodically for material of this type,\n   as it is reintroduced readily through routine maintenance.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1083/",
+                                                             "https://cwe.mitre.org/data/definitions/548.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-548"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

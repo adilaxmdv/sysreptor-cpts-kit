@@ -1,0 +1,48 @@
+﻿{
+    "id":  "46c28cfa-0886-48b0-8fb4-a09f906d5459",
+    "created":  "2026-09-17T07:19:18.511219Z",
+    "updated":  "2026-09-17T07:22:04.829091Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/46c28cfa-0886-48b0-8fb4-a09f906d5459",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/46c28cfa-0886-48b0-8fb4-a09f906d5459/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "ad",
+                 "hardening",
+                 "windows"
+             ],
+    "translations":  [
+                         {
+                             "id":  "97ccb68e-a55a-480b-af7c-1ed87e01da78",
+                             "created":  "2026-09-17T07:19:18.513219Z",
+                             "updated":  "2026-09-17T07:19:18.514810Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.1,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "SMB Message Signing Not Required",
+                                          "cvss":  "CVSS:3.1/AV:A/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+                                          "summary":  "SMB message signing was not enforced across the internal network, allowing\nauthentication attempts to be relayed to other systems and used to gain\nadministrative access without knowledge of any password.",
+                                          "description":  "SMB message signing was not required on the majority of in-scope hosts. Without\nenforced signing, an attacker positioned on the network can intercept NTLM\nauthentication attempts and relay them to a third-party host, authenticating as\nthe victim user without ever recovering or cracking their password.\n\nThis condition is typically combined with name resolution poisoning to coerce\nauthentication from users and systems on the same broadcast domain. No credential\nmaterial is required, and the attack produces no failed authentication events on\nthe targeted account.",
+                                          "impact":  "An attacker with access to the internal network could authenticate to systems as\na privileged user without knowledge of any credentials. Where a relayed account\nholds local administrator rights on the target, this grants remote code execution\nand enables the extraction of further credential material from memory, providing\na route to wider network compromise.",
+                                          "recommendation":  "1. Enforce SMB signing on all servers and workstations through Group Policy:\n   \"Microsoft network server: Digitally sign communications (always)\" = Enabled\n   \"Microsoft network client: Digitally sign communications (always)\" = Enabled\n\n2. Enforce LDAP signing and LDAP channel binding on all domain controllers to\n   prevent relay against directory services.\n\n3. Disable LLMNR and NBT-NS to remove the primary mechanism used to coerce\n   authentication (see the related finding on name resolution poisoning).\n\n4. Restrict NTLM authentication using the \"Network security: Restrict NTLM\"\n   policy settings, and migrate services to Kerberos authentication.\n\n5. Apply changes in a phased manner with monitoring, as enforcing signing can\n   affect legacy applications and non-Windows SMB clients.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1557/001/",
+                                                             "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing",
+                                                             "https://cwe.mitre.org/data/definitions/306.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME_1\u003e (\u003cIP_1\u003e)",
+                                                                      "\u003cHOSTNAME_2\u003e (\u003cIP_2\u003e)",
+                                                                      "Network segment: \u003cCIDR\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-306"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

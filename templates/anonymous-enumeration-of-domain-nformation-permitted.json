@@ -1,0 +1,47 @@
+﻿{
+    "id":  "8ba4a02c-5645-46e3-aff6-fd1b5e9e3b28",
+    "created":  "2026-09-17T10:11:48.962789Z",
+    "updated":  "2026-09-17T10:12:56.457109Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/8ba4a02c-5645-46e3-aff6-fd1b5e9e3b28",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/8ba4a02c-5645-46e3-aff6-fd1b5e9e3b28/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "ad",
+                 "internal",
+                 "windows",
+                 "hardening",
+                 "config"
+             ],
+    "translations":  [
+                         {
+                             "id":  "8bd50726-b810-45a6-9b45-dbe5d2654e24",
+                             "created":  "2026-09-17T10:11:48.964065Z",
+                             "updated":  "2026-09-17T10:11:48.966115Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  5.3,
+                             "risk_level":  "medium",
+                             "data":  {
+                                          "title":  "Anonymous Enumeration of Domain Information Permitted",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+                                          "summary":  "Domain infrastructure permitted unauthenticated users to enumerate account names,\ngroup membership, and password policy, providing an attacker with the information\nrequired to plan credential attacks.",
+                                          "description":  "Windows systems support session establishment without credentials, historically\nrequired for interoperability with legacy clients. Where this is permitted,\nan unauthenticated party can query the target for information about the domain it\nbelongs to.\n\nEnumeration of this type returned the full list of domain user accounts, group\nmembership, the password policy in force, and the account lockout threshold. LDAP\nservices on the domain controllers additionally responded to anonymous binds,\nreturning equivalent directory content.\n\nNone of this constitutes a compromise in itself. Its significance lies in what it\nenables: a valid list of account names removes the guesswork from password\nspraying, and knowledge of the lockout threshold allows an attacker to calibrate\nattempts so that no account is locked and no alert is raised. The password policy\nreveals the minimum length, allowing candidate passwords that would certainly fail\nto be discarded in advance.\n\nAnonymous enumeration was successful against domain infrastructure during this\nassessment.",
+                                          "impact":  "An attacker with network access and no credentials could obtain a complete\ninventory of domain accounts and the constraints governing authentication. This\nmaterially increases the likelihood that a subsequent password attack succeeds\nwhile remaining undetected, and reduces the effort required to identify\nhigh-value targets such as service and administrative accounts.",
+                                          "recommendation":  "1. Set \"Network access: Do not allow anonymous enumeration of SAM accounts and\n   shares\" to Enabled through Group Policy on all systems.\n\n2. Set the RestrictAnonymous and RestrictAnonymousSAM registry values to restrict\n   session establishment without credentials.\n\n3. Disable anonymous LDAP binds on all domain controllers so that directory\n   queries require authentication.\n\n4. Remove any legacy accounts or applications that depend on anonymous access,\n   replacing them with authenticated service accounts holding the minimum\n   privileges required.\n\n5. Restrict SMB and LDAP access at the network level so that these services are\n   reachable only from systems that require them.\n\n6. Apply changes in a controlled manner with monitoring, as legacy applications\n   and non-Windows systems occasionally depend on the behaviour being removed.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1087/002/",
+                                                             "https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-access-do-not-allow-anonymous-enumeration-of-sam-accounts",
+                                                             "https://cwe.mitre.org/data/definitions/200.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e) - \u003cSERVICE\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-200"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

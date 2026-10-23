@@ -1,0 +1,41 @@
+﻿{
+    "id":  "7005c73d-9783-4763-8baf-847c7ef9b387",
+    "created":  "2026-09-16T17:16:54.896902Z",
+    "updated":  "2026-10-23T16:53:16.436232Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/7005c73d-9783-4763-8baf-847c7ef9b387",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/7005c73d-9783-4763-8baf-847c7ef9b387/images",
+    "usage_count":  1,
+    "source":  "imported",
+    "tags":  [
+                 "web"
+             ],
+    "translations":  [
+                         {
+                             "id":  "35c9320b-fa6a-4860-8434-c13e856ebae1",
+                             "created":  "2026-09-16T17:16:54.897770Z",
+                             "updated":  "2026-09-16T17:16:54.898974Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  9.8,
+                             "risk_level":  "critical",
+                             "data":  {
+                                          "title":  "SQL Injection (SQLi)",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "The web application processed user input in an insecure manner and was thus vulnerable to SQL injection. \nIn an SQL injection attack, special input values in the web application are used to influence the application\u0027s SQL statements to its database. \nDepending on the database used and the design of the application, this may make it possible to read and modify the data stored in the database, perform administrative actions (e.g., shut down the DBMS), or in some cases even gain code execution and the accompanying complete control over the vulnerable server.\n",
+                                          "description":  "We identified an SQL injection vulnerability in the web application and were able to access stored data in the database as a result.\n\nThe parameter `\u003cPARAMETER_NAME\u003e` in `\u003cURL\u003e` passes user input into an SQL statement without parameterization. We confirmed the injection by sending a single quote (`\u0027`), which produced a database error, and then by sending boolean conditions (`\u0027 AND 1=1-- -` and `\u0027 AND 1=2-- -`) that changed the response content as expected. The back-end database is `\u003cDBMS\u003e`.\n\nWe then used a UNION-based payload to determine the column count and extract data from the database. The following request retrieved the current database user and version:\n\n```http\nGET \u003cURL\u003e?\u003cPARAMETER_NAME\u003e=\u0027 UNION SELECT NULL,user(),version()-- - HTTP/1.1\nHost: \u003cHOST\u003e\n```\n\nUsing the same technique we enumerated the schema through `information_schema` and dumped `\u003cTABLE_NAME\u003e`, which contains `\u003cSENSITIVE_DATA\u003e`. The tool `sqlmap` confirmed the finding and the injection type (`\u003cBOOLEAN/UNION/ERROR/TIME\u003e`-based).\n\nSQL Injection is a common server-side vulnerability in web applications. \nIt occurs when software developers create dynamic database queries that contain user input. \nIn an attack, user input is crafted in such a way that the originally intended action of an SQL statement is changed. \nSQL injection vulnerabilities result from an application\u0027s failure to create dynamic database queries securely and to properly validate user input. \nThey are based on the fact that the SQL language basically does not distinguish between control characters and data characters. \nIn order to use a control character in the data part of an SQL statement, it must be encoded or escaped appropriately beforehand.\n\nAn SQL injection attack is therefore essentially carried out by inserting a control character such as `\u0027` (single apostrophe) into the user input to place new commands that were not present in the original SQL statement. \nA simple example will demonstrate this process. \nThe following SELECT statement contains a variable userId. \nThe purpose of this statement is to get data of a user with a specific user id from the Users table.\n\n```python\nsqlStmnt = \u0027SELECT * FROM Users WHERE UserId = \u0027 + userId;\n```\n\nAn attacker could now use special user input to change the original intent of the SQL statement. \nFor example, he could use the string `\u0027 or 1=1` as user input. \nIn this case, the application would construct the following SQL statement:\n\n```python\nsqlStmnt = \u0027SELECT * FROM Users WHERE UserId = \u0027 + \u0027 or 1=1;\n```\n\nInstead of the data of a user with a specific user ID, the data of all users in the table is now returned to the attacker after executing the statement. \nThis gives an attacker the ability to control the SQL statement in his own favor. \n\nThere are a number of variants of SQL injection vulnerabilities, attacks and techniques that occur in different situations and depending on the database system used. \nHowever, what they all have in common is that, as in the example above, user input is always used to dynamically construct SQL statements. \nSuccessful SQL injection attacks can have far-reaching consequences. \nOne would be the loss of confidentiality and integrity of the stored data. \nAttackers could gain read and possibly write access to sensitive data in the database. \nSQL injection could also compromise the authentication and authorization of the web application, allowing attackers to bypass existing access controls. \nIn some cases, SQL injection can also be used to gain code execution, allowing an attacker to gain complete control over the vulnerable server.\n",
+                                          "recommendation":  "* Use prepared statements throughout the application to effectively avoid SQL injection vulnerabilities. Prepared statements are parameterized statements and ensure that even if input values are manipulated, an attacker is unable to change the original intent of an SQL statement. \n* Use existing stored procedures by default where possible. Typically, stored procedures are implemented as secure parameterized queries and thus protect against SQL injections.\n* Always validate all user input. Ensure that only input that is expected and valid for the application is accepted. You should not sanitize potentially malicious input.\n* To reduce the potential damage of a successful SQL Injection attack, you should minimize the assigned privileges of the database user used according to the principle of least privilege.\n* For detailed information and assistance on how to prevent SQL Injection vulnerabilities, see OWASP\u0027s linked SQL Injection Prevention Cheat Sheet.\n",
+                                          "short_recommendation":  "Make sure that Prepared Statements and Stored Procedures (where possible) are used throughout the application. This prevents the originally intended action of an SQL statement from being manipulated by an attacker.",
+                                          "references":  [
+                                                             "https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-89"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

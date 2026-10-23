@@ -1,0 +1,44 @@
+﻿{
+    "id":  "b7243e71-f284-4778-a2eb-a88ee026b006",
+    "created":  "2026-09-17T10:40:46.648929Z",
+    "updated":  "2026-09-17T10:41:31.826156Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/b7243e71-f284-4778-a2eb-a88ee026b006",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/b7243e71-f284-4778-a2eb-a88ee026b006/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "web",
+                 "external",
+                 "internal"
+             ],
+    "translations":  [
+                         {
+                             "id":  "abc76d33-0d76-4d59-8dc4-eae240569376",
+                             "created":  "2026-09-17T10:40:46.650589Z",
+                             "updated":  "2026-09-17T10:40:46.652495Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  8.1,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Broken Access Control on Administrative Functionality",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+                                          "summary":  "Administrative functionality was reachable by standard users because access\ncontrol was applied only in the user interface rather than enforced on the\nrequests themselves.",
+                                          "description":  "The application presented different interface elements according to the\nauthenticated user\u0027s role, concealing administrative functionality from standard\nusers. The underlying endpoints, however, performed no role check of their own\nand processed any authenticated request they received.\n\nBecause the interface is rendered by the client, its behaviour is under the\ncontrol of the user. An attacker who knows or discovers the address of an\nadministrative endpoint can issue the request directly, and the application\nexecutes it. Endpoint addresses are commonly disclosed in client-side code,\npredictable from naming conventions, or present in documentation.\n\nThe same weakness applied to role assignment itself, where the value determining a\nuser\u0027s privileges was accepted from the request rather than read from the\nauthenticated session, allowing a user to grant themselves elevated access.\n\nNo exploitation is involved. The attacker issues ordinary, well-formed requests\nthat the application is not entitled to accept, which makes the activity\ndifficult to distinguish from legitimate administrative use in application logs.",
+                                          "impact":  "A standard authenticated user could perform administrative actions within the\napplication, including the management of other users\u0027 accounts and access to data\nacross the full user base. Where role assignment could be influenced, the user\ncould grant themselves persistent administrative access, and the resulting\nactivity would appear legitimate in the application\u0027s own audit records.",
+                                          "recommendation":  "1. Enforce authorisation on the server for every request, verifying the\n   authenticated user\u0027s role against the operation requested. Interface-level\n   concealment is a usability measure and provides no security.\n\n2. Implement the check centrally, applying it by default to all endpoints and\n   requiring an explicit exemption for those intended to be public, so that new\n   functionality is protected without further action.\n\n3. Derive the user\u0027s role from the authenticated session on the server. Never\n   accept role, permission, or identity values from the request.\n\n4. Deny by default, so that an endpoint with no explicit authorisation rule\n   rejects requests rather than accepting them.\n\n5. Log all administrative actions with the identity of the user performing them,\n   and alert on administrative operations performed by accounts not assigned that\n   role.\n\n6. Test each endpoint with a request issued by a standard user as part of the\n   development process, rather than relying on the interface to demonstrate that\n   access is restricted.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1068/",
+                                                             "https://cwe.mitre.org/data/definitions/284.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-284"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

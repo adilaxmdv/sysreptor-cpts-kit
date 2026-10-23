@@ -1,0 +1,45 @@
+﻿{
+    "id":  "71dd7630-9809-4269-9243-462353be745c",
+    "created":  "2026-09-17T10:15:45.405838Z",
+    "updated":  "2026-10-23T16:52:38.888771Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/71dd7630-9809-4269-9243-462353be745c",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/71dd7630-9809-4269-9243-462353be745c/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "web",
+                 "external",
+                 "internal"
+             ],
+    "translations":  [
+                         {
+                             "id":  "e4c9987a-b7bd-4943-9227-d9a7ca1ea992",
+                             "created":  "2026-09-17T10:15:45.407271Z",
+                             "updated":  "2026-09-17T10:15:45.408542Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  9.8,
+                             "risk_level":  "critical",
+                             "data":  {
+                                          "title":  "Operating System Command Injection",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "User-supplied input was incorporated into operating system commands without\nsanitisation, allowing arbitrary commands to be executed on the underlying host.",
+                                          "description":  "The application constructed operating system commands using values supplied in\nthe request, passing the resulting string to a system shell. Because shell\nmetacharacters were neither removed nor escaped, an attacker could terminate the\nintended command and append commands of their own.\n\nExecution occurs in the security context of the account running the application,\ntypically a service account with access to application configuration, connected\ndatabases, and the local network. Where that account holds elevated privileges,\ncompromise of the host follows immediately.\n\nThe issue often arises in functionality that wraps a command-line utility,\nsuch as network diagnostics, file conversion, archive handling, or report\ngeneration. Input validation implemented on the client side offers no protection,\nas requests can be submitted directly.\n\nCommand execution was confirmed during testing.",
+                                          "impact":  "An attacker could execute arbitrary commands on the affected server, resulting in\ndisclosure of application source code, configuration, and credentials, access to\ndata held by the application and connected systems, and the ability to modify or\ndestroy that data. The compromised host also provides a position within\nthe internal network from which further systems can be attacked.",
+                                          "recommendation":  "1. Avoid invoking operating system commands from application code where a native\n   library provides equivalent functionality. This removes the vulnerability\n   class entirely rather than mitigating it.\n\n2. Where a command must be invoked, use an interface that passes arguments as a\n   structured array rather than as a single string interpreted by a shell, so\n   that metacharacters carry no special meaning.\n\n3. Validate all user-supplied values against a strict allowlist of permitted\n   characters or against a fixed set of accepted options, rejecting anything that\n   does not match.\n\n4. Never construct commands through string concatenation of user input, and do\n   not rely on escaping as the primary control, as escaping rules differ between\n   shells and platforms.\n\n5. Run the application under a dedicated low-privileged account and restrict its\n   outbound network access, limiting what an attacker can achieve should\n   execution occur.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1059/",
+                                                             "https://owasp.org/www-community/attacks/Command_Injection",
+                                                             "https://cwe.mitre.org/data/definitions/78.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-78"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

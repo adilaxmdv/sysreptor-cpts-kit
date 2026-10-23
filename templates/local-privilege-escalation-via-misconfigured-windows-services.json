@@ -1,0 +1,46 @@
+﻿{
+    "id":  "063bb8e1-afb5-4a6d-8434-0e7f89baa3d4",
+    "created":  "2026-09-17T10:24:42.545531Z",
+    "updated":  "2026-09-17T10:25:43.478550Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/063bb8e1-afb5-4a6d-8434-0e7f89baa3d4",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/063bb8e1-afb5-4a6d-8434-0e7f89baa3d4/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "internal",
+                 "windows",
+                 "privesc",
+                 "config"
+             ],
+    "translations":  [
+                         {
+                             "id":  "e540ecfb-ddf4-4622-b9b6-582660752229",
+                             "created":  "2026-09-17T10:24:42.546856Z",
+                             "updated":  "2026-09-17T10:24:42.548209Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.8,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Local Privilege Escalation via Misconfigured Windows Services",
+                                          "cvss":  "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "Windows services were configured in a manner that allowed standard users to\ncontrol the code executed when the service starts, providing a route to\nSYSTEM-level access on the affected hosts.",
+                                          "description":  "Windows services typically run under the SYSTEM account, the highest privilege\nlevel available on the operating system. Where a standard user can influence what\nthe service executes, that user can obtain SYSTEM privileges.\n\nSeveral distinct misconfigurations produce this outcome. Where the service binary\nor its containing directory is writable by non-administrative users, the binary\ncan be replaced. Where the service configuration itself is modifiable, the\nexecutable path can be redirected. Where the path contains spaces and is not\nenclosed in quotation marks, Windows attempts to execute each partial path in\nturn, allowing an executable placed at a predictable location to be run instead\nof the intended one. Where the service loads a library from a directory the user\ncontrols, that library can be substituted.\n\nIn each case the attacker supplies content that the operating system executes\nwith SYSTEM privileges when the service next starts. Where the user can also\nrestart the service, or where the host reboots on a schedule, no further\ninteraction is required.\n\nThese conditions arise most frequently with third-party software installed\noutside the standard program directories, where the installer applies permissions\ninherited from the parent directory rather than setting them explicitly.",
+                                          "impact":  "An attacker holding access to any standard user account on the affected systems,\nincluding access obtained through a compromised application service, could\nescalate to SYSTEM privileges. This permits the extraction of credential material\nfrom memory including that of privileged users who have logged on, the\ninstallation of persistence, and the disabling of endpoint security controls,\nproviding material with which to attack the wider environment.",
+                                          "recommendation":  " 1. Correct the permissions on service binaries and their containing directories\n   so that write access is restricted to administrators and the SYSTEM account.\n\n2. Review service configuration permissions and remove the ability of\n   non-administrative users to modify service definitions.\n\n3. Enclose all service executable paths containing spaces in quotation marks\n   within the registry, ensuring the intended binary is resolved.\n\n4. Install third-party software within the standard program directories, where\n   appropriate permissions are applied by default, rather than in locations\n   created at the filesystem root.\n\n5. Audit service configuration across the estate on a recurring basis, as\n   software updates and reinstallations frequently reintroduce the conditions\n   after remediation.\n\n6. Apply application control so that only approved binaries may execute,\n   preventing substituted content from running even where permissions are\n   incorrect.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1574/010/",
+                                                             "https://learn.microsoft.com/en-us/windows/win32/services/service-security-and-access-rights",
+                                                             "https://cwe.mitre.org/data/definitions/732.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cHOSTNAME\u003e (\u003cIP\u003e) - service: \u003cSERVICE_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-732"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

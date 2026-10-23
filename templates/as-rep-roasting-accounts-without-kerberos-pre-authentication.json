@@ -1,0 +1,46 @@
+﻿{
+    "id":  "68fe04e3-e54d-46b8-81a0-860a1210b2b7",
+    "created":  "2026-09-17T09:54:22.419903Z",
+    "updated":  "2026-09-17T09:55:49.986704Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/68fe04e3-e54d-46b8-81a0-860a1210b2b7",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/68fe04e3-e54d-46b8-81a0-860a1210b2b7/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "ad",
+                 "internal",
+                 "windows",
+                 "credentials"
+             ],
+    "translations":  [
+                         {
+                             "id":  "34111073-dc34-40a5-ba59-3e3237e2dfb6",
+                             "created":  "2026-09-17T09:54:22.423936Z",
+                             "updated":  "2026-09-17T09:54:22.432611Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  7.5,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "AS-REP Roasting - Accounts Without Kerberos Pre-Authentication",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                                          "summary":  "Domain accounts were configured without Kerberos pre-authentication, allowing\npassword material to be requested and cracked offline by an unauthenticated\nattacker with no credentials of any kind.",
+                                          "description":  "Kerberos pre-authentication requires a client to prove knowledge of its password\nbefore the Key Distribution Centre will issue an authentication ticket. Where the\n\"Do not require Kerberos preauthentication\" attribute is set on an account, this\ncheck is skipped and the KDC will return an AS-REP message to any requester.\n\nThe returned message contains a portion encrypted with a key derived from the\naccount\u0027s password. An attacker requires only the account name to obtain it;\nno valid domain credentials are needed, meaning this attack can be performed by\nan entirely unauthenticated party with network access to a domain controller.\n\nBecause the recovered material is cracked offline, the process generates no\nfailed authentication events, does not increment the account lockout counter,\nand remains invisible to controls that monitor authentication failures.\n\nAccounts within the domain were identified with this attribute set. The password\nof at least one such account was recovered offline using a publicly available\nwordlist, indicating that the password did not meet the length required to resist\noffline attack.",
+                                          "impact":  "An attacker with network access to a domain controller and no credentials could\nrecover the plaintext password of an affected account. This provides an initial\nfoothold in the domain without any prior access. Where the affected account holds\nelevated privileges, the attacker gains those privileges directly, and where it\nholds only standard access, the account still serves as the starting point for\nfurther attacks that require authenticated domain access.",
+                                          "recommendation":  "1. Enable Kerberos pre-authentication on all accounts by clearing the\n   \"Do not require Kerberos preauthentication\" attribute in Active Directory\n   Users and Computers, or by setting the DONT_REQ_PREAUTH flag to false.\n\n2. Where a legacy application genuinely requires the setting, document the\n   business justification, restrict the account to the minimum privileges\n   required, and assign it a randomly generated password of at least 25\n   characters.\n\n3. Audit the domain regularly for accounts with the attribute set, as it is\n   frequently enabled during troubleshooting and never reverted.\n\n4. Configure alerting on Kerberos event ID 4768 where the pre-authentication\n   type is zero, which indicates an AS-REP request against an affected account.\n\n5. Increase the domain minimum password length so that recovered material cannot\n   be cracked within a practical timeframe.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1558/004/",
+                                                             "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4768",
+                                                             "https://cwe.mitre.org/data/definitions/521.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cDOMAIN\u003e - account: \u003cACCOUNT_NAME\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-521"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}

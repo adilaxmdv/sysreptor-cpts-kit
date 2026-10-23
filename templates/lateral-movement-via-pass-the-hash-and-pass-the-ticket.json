@@ -1,0 +1,47 @@
+﻿{
+    "id":  "d97c6afe-faae-48ff-9ff8-4879d37425fe",
+    "created":  "2026-10-23T16:54:05.761110Z",
+    "updated":  "2026-10-23T16:54:05.765661Z",
+    "details":  "http://localhost:8000/api/v1/findingtemplates/d97c6afe-faae-48ff-9ff8-4879d37425fe",
+    "images":  "http://localhost:8000/api/v1/findingtemplates/d97c6afe-faae-48ff-9ff8-4879d37425fe/images",
+    "usage_count":  0,
+    "source":  "created",
+    "tags":  [
+                 "ad",
+                 "internal",
+                 "windows",
+                 "credentials",
+                 "lateral"
+             ],
+    "translations":  [
+                         {
+                             "id":  "d9652b04-79bb-4e25-92e8-d526043582f1",
+                             "created":  "2026-10-23T16:54:05.762166Z",
+                             "updated":  "2026-10-23T16:54:05.764483Z",
+                             "language":  "en-US",
+                             "status":  "finished",
+                             "is_main":  true,
+                             "risk_score":  8.8,
+                             "risk_level":  "high",
+                             "data":  {
+                                          "title":  "Lateral Movement via Pass-the-Hash and Pass-the-Ticket",
+                                          "cvss":  "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                                          "summary":  "NTLM hashes and Kerberos tickets extracted from compromised hosts were used to authenticate to additional systems without knowing the plaintext password, enabling movement across the network.",
+                                          "description":  "Windows NTLM authentication accepts the password hash directly during the challenge-response exchange. An attacker who extracts the NTLM hash of an account from a compromised host can authenticate as that account to any service that accepts NTLM, without ever recovering the plaintext password. This is commonly referred to as pass-the-hash.\n\nKerberos tickets (TGTs and service tickets) extracted from memory on a compromised host can be injected into a new logon session on the attacker\u0027s system. The injected ticket is then used to access services as the ticket owner. This is referred to as pass-the-ticket.\n\nA variant called overpass-the-hash uses an NTLM hash to request a Kerberos TGT from the KDC, converting hash-based access into Kerberos-based access. This is useful when NTLM is restricted but Kerberos is available.\n\nThese techniques were used during the assessment to move between hosts after extracting credential material from compromised systems. The authentication events generated appear identical to legitimate logons and do not trigger failed-authentication alerts.\n\nTools used included Impacket (psexec.py, wmiexec.py, smbexec.py), CrackMapExec, and Rubeus for ticket operations.",
+                                          "impact":  "Compromise of a single host provided the credential material needed to authenticate to additional systems across the network. Each newly compromised host yielded further credentials, creating a chain of access that reached progressively more sensitive systems. The technique requires no password cracking and produces no failed authentication events, making it difficult to detect with standard monitoring.",
+                                          "recommendation":  "1. Deploy Windows LAPS to ensure every host has a unique local administrator password, breaking the lateral movement chain for local accounts.\n\n2. Add privileged accounts to the Protected Users security group, which prevents NTLM authentication and enforces Kerberos with non-exportable keys.\n\n3. Enable Credential Guard on all supported systems to protect LSASS process memory from credential extraction.\n\n4. Restrict administrative logons so that tier-zero accounts authenticate only to tier-zero systems, preventing their credentials from being exposed on lower-tier hosts.\n\n5. Monitor for logon events where the authentication package is NTLM and the source is unexpected, and for Kerberos TGT requests from hosts that are not the account\u0027s usual workstation.\n\n6. Disable NTLM authentication where possible using the Network Security: Restrict NTLM group policy settings, forcing Kerberos which provides better detection opportunities.",
+                                          "references":  [
+                                                             "https://attack.mitre.org/techniques/T1550/002/",
+                                                             "https://attack.mitre.org/techniques/T1550/003/",
+                                                             "https://cwe.mitre.org/data/definitions/287.html"
+                                                         ],
+                                          "affected_components":  [
+                                                                      "\u003cSOURCE_HOST\u003e -\u003e \u003cTARGET_HOST\u003e - account: \u003cACCOUNT_NAME\u003e, method: \u003cPtH/PtT/overpass-the-hash\u003e"
+                                                                  ],
+                                          "cwe":  "CWE-287"
+                                      }
+                         }
+                     ],
+    "lock_info":  null,
+    "copy_of":  null
+}
